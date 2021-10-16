@@ -89,7 +89,7 @@ const App = (props) => {
             <div className='order'>
               <h2>{type}{number}님 선택해주세요</h2>
               <div>
-                <h2>armor</h2>
+                <h3>armor</h3>
                 <input type='radio' name='armor' id='armor0' value='특1호' onChange={({ target: { value } }) => setAmor(value)} defaultChecked /><label htmlFor='armor0'>특1호</label>
                 <input type='radio' name='armor' id='armor1' value='1호' onChange={({ target: { value } }) => setAmor(value)} /><label htmlFor='armor1'>1호</label>
                 <input type='radio' name='armor' id='armor2' value='2호' onChange={({ target: { value } }) => setAmor(value)} /><label htmlFor='armor2'>2호</label>
