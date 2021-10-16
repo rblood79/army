@@ -15,9 +15,9 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "cross-env NODE_PATH=src react-scripts start",
-    "build": "cross-env NODE_PATH=src react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "start": "NODE_PATH=src react-scripts start",
+    "build": "NODE_PATH=src react-scripts build",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -38,5 +38,9 @@
       "last 1 safari version",
       "ie 11"
     ]
-  }
+  },
+  "homepage": "./",
+  "plugins": [
+    "babel/transform-react-jsx"
+  ]
 }
