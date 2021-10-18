@@ -1,22 +1,23 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 
 const App = (props) => {
+  const [active, setActive] = useState(0);
   const [number, setNumber] = useState(null);
   const [pw, setPw] = useState(null);
-  const [type, setType] = useState('육군');
-  const [armor, setAmor] = useState('특1호');
-  const [gloves, setGloves] = useState('대');
-  const [shoes, setShoes] = useState('대');
-  const [mask, setMask] = useState('특대');
+  const [type, setType] = useState(null);
+  const [armor, setAmor] = useState(null);
+  const [gloves, setGloves] = useState(null);
+  const [shoes, setShoes] = useState(null);
+  const [mask, setMask] = useState(null);
 
   const [state, setState] = useState(null);
   const [data, setData] = useState(null);
 
   let reg_num = /^[0-9]{10,10}$/; // 전화번호 숫자만
-  
+
   const onCheck = async () => {
     !reg_num.test(number) && setNumber('fail')
     !reg_num.test(pw) && setPw('fail')
@@ -31,6 +32,15 @@ const App = (props) => {
     }
   }
 
+  /*const setA = (value) => {
+    setAmor(value)
+    setActive(1)
+  }
+  const setS = (value) => {
+    setShoes(value)
+    setActive(2)
+  }*/
+
   const onSave = async () => {
     //console.log('onSave', number)
     await setDoc(doc(props.user, number), {
@@ -44,6 +54,10 @@ const App = (props) => {
     onCheck()
   }
 
+  useEffect(() => {
+    console.log('//',armor, shoes, gloves, mask);
+    setActive(active + 1)
+  }, [armor, shoes, gloves, mask])
   return (
     <div className='container'>
       {
@@ -88,38 +102,46 @@ const App = (props) => {
             :
             <div className='order'>
               <h2>{type}{number}님 선택해주세요</h2>
-              <div>
-                <h3>armor</h3>
-                <input type='radio' name='armor' id='armor0' value='특1호' onChange={({ target: { value } }) => setAmor(value)} defaultChecked /><label htmlFor='armor0'>특1호</label>
-                <input type='radio' name='armor' id='armor1' value='1호' onChange={({ target: { value } }) => setAmor(value)} /><label htmlFor='armor1'>1호</label>
-                <input type='radio' name='armor' id='armor2' value='2호' onChange={({ target: { value } }) => setAmor(value)} /><label htmlFor='armor2'>2호</label>
-                <input type='radio' name='armor' id='armor3' value='3호' onChange={({ target: { value } }) => setAmor(value)} /><label htmlFor='armor3'>3호</label>
-                <input type='radio' name='armor' id='armor4' value='4호' onChange={({ target: { value } }) => setAmor(value)} /><label htmlFor='armor4'>4호</label>
-                <input type='radio' name='armor' id='armor5' value='5호' onChange={({ target: { value } }) => setAmor(value)} /><label htmlFor='armor5'>5호</label>
-                <input type='radio' name='armor' id='armor6' value='6호' onChange={({ target: { value } }) => setAmor(value)} /><label htmlFor='armor6'>6호</label>
+              <div className='accordion'>
+                <div className='accordionItem'>
+                  <h3 className='accordionHead' onClick={() => { setActive(0) }}>armor</h3>
+                  <div className='accordionBody' style={{ height: active === 0 && 'auto' }}>
+                    <input type='radio' name='armor' id='armor0' value='특1호' onChange={({ target: { value } }) => setAmor(value)} /><label htmlFor='armor0'>특1호</label>
+                    <input type='radio' name='armor' id='armor1' value='1호' onChange={({ target: { value } }) => setAmor(value)} /><label htmlFor='armor1'>1호</label>
+                    <input type='radio' name='armor' id='armor2' value='2호' onChange={({ target: { value } }) => setAmor(value)} /><label htmlFor='armor2'>2호</label>
+                    <input type='radio' name='armor' id='armor3' value='3호' onChange={({ target: { value } }) => setAmor(value)} /><label htmlFor='armor3'>3호</label>
+                    <input type='radio' name='armor' id='armor4' value='4호' onChange={({ target: { value } }) => setAmor(value)} /><label htmlFor='armor4'>4호</label>
+                    <input type='radio' name='armor' id='armor5' value='5호' onChange={({ target: { value } }) => setAmor(value)} /><label htmlFor='armor5'>5호</label>
+                    <input type='radio' name='armor' id='armor6' value='6호' onChange={({ target: { value } }) => setAmor(value)} /><label htmlFor='armor6'>6호</label>
+                  </div>
+                </div>
+                <div className='accordionItem'>
+                  <h3 className='accordionHead' onClick={() => { setActive(1) }}>shoes</h3>
+                  <div className='accordionBody' style={{ height: active === 1 && 'auto' }}>
+                    <input type='radio' name='shoes' id='shoes0' value='대' onChange={({ target: { value } }) => setShoes(value)} /><label htmlFor='shoes0'>대</label>
+                    <input type='radio' name='shoes' id='shoes2' value='소' onChange={({ target: { value } }) => setShoes(value)} /><label htmlFor='shoes2'>소</label>
+                  </div>
+                </div>
+                <div className='accordionItem'>
+                  <h3 className='accordionHead' onClick={() => { setActive(2) }}>gloves</h3>
+                  <div className='accordionBody' style={{ height: active === 2 && 'auto' }}>
+                    <input type='radio' name='gloves' id='gloves0' value='대' onChange={({ target: { value } }) => setGloves(value)} /><label htmlFor='gloves0'>대</label>
+                    <input type='radio' name='gloves' id='gloves1' value='중' onChange={({ target: { value } }) => setGloves(value)} /><label htmlFor='gloves1'>중</label>
+                    <input type='radio' name='gloves' id='gloves2' value='소' onChange={({ target: { value } }) => setGloves(value)} /><label htmlFor='gloves2'>소</label>
+                  </div>
+                </div>
+                <div className='accordionItem'>
+                  <h3 className='accordionHead' onClick={() => { setActive(3) }}>mask</h3>
+                  <div className='accordionBody' style={{ height: active === 3 && 'auto' }}>
+                    <input type='radio' name='mask' id='mask0' value='특대' onChange={({ target: { value } }) => setMask(value)} /><label htmlFor='mask0'>특대</label>
+                    <input type='radio' name='mask' id='mask1' value='대' onChange={({ target: { value } }) => setMask(value)} /><label htmlFor='mask1'>대</label>
+                    <input type='radio' name='mask' id='mask2' value='중' onChange={({ target: { value } }) => setMask(value)} /><label htmlFor='mask2'>중</label>
+                    <input type='radio' name='mask' id='mask3' value='소' onChange={({ target: { value } }) => setMask(value)} /><label htmlFor='mask3'>소</label>
+                  </div>
+                </div>
               </div>
               <div>
-                <h2>shoes</h2>
-                <input type='radio' name='shoes' id='shoes0' value='대' onChange={({ target: { value } }) => setShoes(value)} defaultChecked /><label htmlFor='shoes0'>대</label>
-                <input type='radio' name='shoes' id='shoes2' value='소' onChange={({ target: { value } }) => setShoes(value)} /><label htmlFor='shoes2'>소</label>
-              </div>
-              <div>
-                <h2>gloves</h2>
-                <input type='radio' name='gloves' id='gloves0' value='대' onChange={({ target: { value } }) => setGloves(value)} defaultChecked /><label htmlFor='gloves0'>대</label>
-                <input type='radio' name='gloves' id='gloves1' value='중' onChange={({ target: { value } }) => setGloves(value)} /><label htmlFor='gloves1'>중</label>
-                <input type='radio' name='gloves' id='gloves2' value='소' onChange={({ target: { value } }) => setGloves(value)} /><label htmlFor='gloves2'>소</label>
-              </div>
-              <div>
-                <h2>mask</h2>
-                <input type='radio' name='mask' id='mask0' value='특대' onChange={({ target: { value } }) => setMask(value)} defaultChecked /><label htmlFor='mask0'>특대</label>
-                <input type='radio' name='mask' id='mask1' value='대' onChange={({ target: { value } }) => setMask(value)} /><label htmlFor='mask1'>대</label>
-                <input type='radio' name='mask' id='mask2' value='중' onChange={({ target: { value } }) => setMask(value)} /><label htmlFor='mask2'>중</label>
-                <input type='radio' name='mask' id='mask3' value='소' onChange={({ target: { value } }) => setMask(value)} /><label htmlFor='mask3'>소</label>
-              </div>
-              <div>
-                <h2>controll</h2>
-                <p>신청완료시 자동 로그아웃 됩니다</p>
-                <button onClick={onSave}>save</button>
+                <button onClick={onSave}>신청</button>
               </div>
             </div>
       }

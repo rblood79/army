@@ -7,6 +7,26 @@
   flex-direction: column;
 }
 
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #000;
+  color: #61dafb;
+  height: 48px;
+  width: 100%;
+}
+
+.foot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  color: #61dafb;
+  height: 48px;
+  width: 100%;
+}
+
 .main {
   width: 100%;
 }
@@ -80,6 +100,9 @@
   outline: none;
   padding: 0;
   margin: 0;
+  text-indent: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
 }
 
 .vali {
@@ -89,12 +112,11 @@
   color: #f00;
 }
 
-.login, .order, .user{
-  border: 1px solid #f00;
-  width: 430px;
+.login, .order, .user {
+  border: 0px solid #f00;
+  width: 375px;
   max-width: 100%;
 }
-
 
 .container {
   display: flex;
@@ -102,6 +124,34 @@
   align-items: center;
   justify-content: center;
   padding: 16px;
+}
+
+.accordion {
+  border: 1px solid #f00;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.accordionItem {
+  border-bottom: 1px solid #f00;
+}
+.accordionItem:last-child {
+  border-bottom: 0px;
+}
+
+.accordionHead {
+  background-color: #ccc;
+  margin: 0;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.accordionBody {
+  background-color: #efefef;
+  overflow: hidden;
+  height: 0;
 }
 
 @keyframes App-logo-spin {
