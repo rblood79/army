@@ -13,7 +13,7 @@ const App = (props) => {
   const [shoes, setShoes] = useState(null);
   const [mask, setMask] = useState(null);
 
-  const [state, setState] = useState(null);
+  const [state, setState] = useState(false);
   const [data, setData] = useState(null);
 
   let reg_num = /^[0-9]{10,10}$/; // 전화번호 숫자만
@@ -101,7 +101,7 @@ const App = (props) => {
           : data && data.length > 0 ?
             <div className='user'>
               <h2>{!state ? '신청 내역이 있습니다' : '신청완료되었습니다'}</h2>
-              <div className='comment'>수고하셨습니다</div>
+              <div className='comment'>{!state ? '사이즈를 변경하시려면 아래의 재신청을 누르세요' : '수고하셨습니다'}</div>
               <div className='controll'>
                 <button className='buttonLeft' onClick={() => {
                   setArmor(null)
@@ -115,6 +115,7 @@ const App = (props) => {
                   setData(null)
                   setNumber(null)
                   setPw(null)
+                  setState(false)
                 }}>로그아웃</button>
               </div>
             </div>

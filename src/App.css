@@ -26,6 +26,13 @@
   color: #ccc;
 }
 
+.headTitle{
+  margin-left: 16px;
+}
+.nav {
+  margin-right: 16px;
+}
+
 .main {
   width: 100%;
   flex: 1;
