@@ -4,7 +4,7 @@
 const App = (props) => {
     return (
       <footer className="foot">
-        T All rights reserved.
+         ministry of national defense.
       </footer>
     );
   }

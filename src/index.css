@@ -24,10 +24,22 @@ code {
 }
 
 button {
-  border: 1px solid #ccc;
   padding: 4px 32px;
-  background-color: #efefef;
+  border: 1px solid rgba(0,0,0,0.3);
+  background-color: #242424;
+  color: #099;
+  width: 100%;
   height: 48px;
   border-radius: 8px;
   font-size: 16px;
+  font-weight: bold;
+}
+
+button:disabled {
+  background-color: #efefef;
+  color: #999;
+}
+
+input[type='radio'] {
+  display: none;
 }

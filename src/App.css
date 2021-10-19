@@ -21,14 +21,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #000;
-  color: #61dafb;
   height: 48px;
   width: 100%;
+  color: #ccc;
 }
 
 .main {
   width: 100%;
+  flex: 1;
 }
 
 .App-logo {
@@ -116,6 +116,17 @@
   border: 0px solid #f00;
   width: 375px;
   max-width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.login h2, .user h2 {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .container {
@@ -123,35 +134,145 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 100%;
+  padding: 0 16px;
+}
+
+.comment {
   padding: 16px;
 }
 
+.title {
+  padding: 16px 0;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 24px;
+}
+
 .accordion {
-  border: 1px solid #f00;
+  border: 1px solid #494949;
   border-radius: 16px;
   overflow: hidden;
 }
 
 .accordionItem {
-  border-bottom: 1px solid #f00;
+  border-bottom: 1px solid #aaa;
 }
+
 .accordionItem:last-child {
   border-bottom: 0px;
 }
 
 .accordionHead {
-  background-color: #ccc;
+  background-color: #efefef;
   margin: 0;
   height: 48px;
+  padding: 0 16px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  font-size: 14px;
 }
 
 .accordionBody {
   background-color: #efefef;
   overflow: hidden;
   height: 0;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
+
+.accordionBodyActive {
+  height: 336px;
+  opacity: 1;
+  transition: all 0.3s ease-in-out;
+}
+
+.controll {
+  display: flex;
+  flex-direction: row;
+}
+
+.order .controll {
+  flex-direction: column;
+}
+
+.buttonLeft {
+  margin-right: 8px;
+  background-color: #efefef;
+  color: #999;
+}
+
+.buttonRight {
+  margin-left: 8px;
+}
+
+.label {
+  border-bottom: 1px solid #efefef;
+  height: 48px;
+  padding: 0 16px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.label:last-child {
+  border-bottom: 0;
+}
+
+.label span:first-child {
+  margin-right: 16px;
+}
+
+.accordionItem input[type='radio']:checked+label {
+  background-color: #f00;
+}
+
+.accordionItem input[type='radio']:checked+label:after {
+  content: url('./page/check-line.png');
+  position: absolute;
+  right: 24px;
+}
+
+.armySelect {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: 16px;
+  position: relative;
+}
+.armyLeft {
+  border-right: none;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.armyCenter {
+  border-right: none;
+  border-left: none;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.armyRight{
+  border-left: none;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.armySelect input[type='radio']:checked+label:after {
+  content: url('./page/check-line.png');
+  position: absolute;
+  top: 0px;
+  opacity: 0.6;
 }
 
 @keyframes App-logo-spin {
