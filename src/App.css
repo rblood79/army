@@ -1,40 +1,48 @@
 .App {
   text-align: center;
-  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
+  /*justify-content: center;*/
+  min-height: 100%;
+}
+
+.App.mobile {
+  height: 100%;
 }
 
 .head {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  background-color: #000;
-  color: #61dafb;
-  height: 48px;
+  height: 55px;
   width: 100%;
+  background: #efefef;
+  position: sticky;
+  top: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.16);
 }
 
 .foot {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 48px;
+  height: 24px;
   width: 100%;
   color: #ccc;
 }
 
-.headTitle{
-  margin-left: 16px;
-}
-.nav {
-  margin-right: 16px;
+.headTitle {
+  position: absolute;
+  left: 16px;
 }
 
 .main {
   width: 100%;
+}
+
+.App.mobile .main {
   flex: 1;
 }
 
@@ -112,6 +120,17 @@
   border: 1px solid #ccc;
 }
 
+.input .id {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: 0;
+}
+
+.input .pw {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
 .vali {
   width: 100%;
   height: 18px;
@@ -134,6 +153,31 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.login .appIcon {
+  width: 128px;
+  height: 128px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  /*border: 2px solid #a7a7a7;
+  box-shadow: 0 0 16px rgba(0,0,0,0.48);*/
+}
+
+.login h2 img {
+  width: 96%;
+}
+
+.user .title i {
+  font-size: 48px;
+  color: #a7a7a7;
+  margin-bottom: 16px;
 }
 
 .container {
@@ -142,6 +186,9 @@
   align-items: center;
   justify-content: center;
   height: 100%;
+}
+
+.App.mobile .container {
   padding: 0 16px;
 }
 
@@ -153,12 +200,18 @@
   padding: 16px 0;
   margin: 0;
   font-size: 18px;
-  font-weight: 300;
-  line-height: 24px;
+  font-weight: 400;
+  line-height: 36px;
+  text-align: left;
+}
+
+.subTtitle {
+  font-size: 14px;
+  text-decoration: underline;
 }
 
 .accordion {
-  border: 1px solid #494949;
+  border: 1px solid #343434;
   border-radius: 16px;
   overflow: hidden;
 }
@@ -180,6 +233,7 @@
   justify-content: space-between;
   align-items: center;
   font-size: 14px;
+  font-weight: 400;
 }
 
 .accordionBody {
@@ -191,7 +245,7 @@
 }
 
 .accordionBodyActive {
-  height: 336px;
+  height: 342px;
   opacity: 1;
   transition: all 0.3s ease-in-out;
 }
@@ -216,7 +270,7 @@
 }
 
 .label {
-  border-bottom: 1px solid #efefef;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.01);
   height: 48px;
   padding: 0 16px;
   display: flex;
@@ -228,12 +282,14 @@
   border-bottom: 0;
 }
 
-.label span:first-child {
-  margin-right: 16px;
+.label span:first-child::after {
+  content: '·';
+  padding: 0 8px;
 }
 
 .accordionItem input[type='radio']:checked+label {
-  background-color: #f00;
+  background-color: #343434;
+  color: #fff;
 }
 
 .accordionItem input[type='radio']:checked+label:after {
@@ -247,39 +303,146 @@
   flex-direction: row;
   justify-content: center;
   margin-bottom: 16px;
+  margin-top: 8px;
   position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.24);
+  border-radius: 8px;
+  overflow: hidden;
 }
+
 .armyLeft {
   border-right: none;
-  width: 48px;
+  width: 33.3333%;
   height: 48px;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #efefef;
 }
+
 .armyCenter {
   border-right: none;
   border-left: none;
-  width: 48px;
+  width: 33.3333%;
   height: 48px;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #efefef;
 }
-.armyRight{
+
+.armyRight {
   border-left: none;
-  width: 48px;
+  width: 33.3333%;
   height: 48px;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #efefef;
 }
 
 .armySelect input[type='radio']:checked+label:after {
   content: url('./page/check-line.png');
   position: absolute;
-  top: 0px;
-  opacity: 0.6;
+  top: 8px;
+}
+
+.armySelect input[type='radio']:checked+.armyLeft {
+  background-color: #06799b;
+}
+.armySelect input[type='radio']:checked+.armyCenter {
+  background-color: #0f60ca;
+}
+.armySelect input[type='radio']:checked+.armyRight {
+  background-color: #79dbff;
+}
+
+.resultHead {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.total {
+  margin-bottom: 48px;
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: row;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+}
+
+.buttonGroup button {
+  border: none;
+  padding: 0 16px;
+  min-width: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  height: 36px !important;
+  cursor: pointer;
+}
+
+.buttonGroup button i {
+  font-size: 18px;
+  margin-right: 4px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  border-left: 1px solid rgba(0, 0, 0, 0.16);
+  border-right: 1px solid rgba(0, 0, 0, 0.16);
+}
+
+.nav .navButton {
+  text-decoration: none;
+  background-color: #fff;
+  padding: 0;
+  border: 0;
+  height: 56px !important;
+  width: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #a7a7a7;
+  cursor: pointer;
+}
+
+.nav .navButton i {
+  font-size: 18px;
+  margin-bottom: 4px;
+  color: #a7a7a7;
+}
+
+.nav .navButton.active {
+  color: #343434;
+}
+
+.nav .navButton.active i {
+  color: #343434;
+}
+
+tbody tr:hover {
+  transition: all 0.3s ease-in-out;
+  background-color: #ccc !important;
+}
+
+.profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile i {
+  margin-right: 8px;
+  font-size: 21px;
 }
 
 @keyframes App-logo-spin {

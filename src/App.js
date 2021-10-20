@@ -1,8 +1,9 @@
 
-
+import { isMobile } from 'react-device-detect';
 import { Route } from "react-router-dom";
 import './App.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
 
 import Head from './component/Head';
 import Foot from './component/Foot';
@@ -12,7 +13,7 @@ import Result from './page/Result';
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, query, where, doc, setDoc, getDoc, getDocs } from 'firebase/firestore';
+import { getFirestore, collection} from 'firebase/firestore';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -34,10 +35,12 @@ const db = getFirestore(app);
 const usersRef = collection(db, "users");
 
 const App = (props) => {
-
+  useEffect(() => {
+    console.log(props.location.pathname)
+  }, [])
   return (
-    <div className="App">
-      <Head />
+    <div className={isMobile ? "App mobile" : "App"}>
+      {props.location.pathname === '/' ?  <div /> : props.location.pathname === '/result' &&  <Head />}
       <main className='main'>
         <Route exact path="/" render={() => <Home user={usersRef} />} />
         <Route path="/result" render={() => <Result user={usersRef} />} />

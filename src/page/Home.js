@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
-
+import { Link } from "react-router-dom";
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 
 const App = (props) => {
@@ -19,8 +19,7 @@ const App = (props) => {
   let reg_num = /^[0-9]{10,10}$/; // 전화번호 숫자만
 
   const onCheck = async () => {
-    !reg_num.test(number) && setNumber('fail')
-    !reg_num.test(pw) && setPw('fail')
+    !reg_num.test(number) ? setNumber('fail') : !reg_num.test(pw) && setPw('fail')
     const tempDoc = [];
     if (number && pw !== 'fail' && number === pw) {
       const docRef = doc(props.user, number);
@@ -31,15 +30,6 @@ const App = (props) => {
       setPw('same')
     }
   }
-
-  /*const setA = (value) => {
-    setAmor(value)
-    setActive(1)
-  }
-  const setS = (value) => {
-    setShoes(value)
-    setActive(2)
-  }*/
 
   const onSave = async () => {
     //console.log('onSave', number)
@@ -72,35 +62,44 @@ const App = (props) => {
       {
         (!data) ?
           <div className='login'>
-            <h2>안녕하세요<br />화생방 보호의 신청 입니다</h2>
+            <h2><div className='appIcon'><img src={'./mnd.gif'} alt='국방부' /></div>화생방 보호의 신청</h2>
             <div>
+              <div>소속된 군을 선택하세요</div>
               <div className='armySelect'>
-                <input type='radio' name='type' id='type0' value='육군' onChange={({ target: { value } }) => setType(value)} defaultChecked /><label htmlFor='type0' className='armyLeft'>육군</label>
+                <input type='radio' name='type' id='type0' value='육군' onChange={({ target: { value } }) => setType(value)} /><label htmlFor='type0' className='armyLeft'>육군</label>
                 <input type='radio' name='type' id='type1' value='공군' onChange={({ target: { value } }) => setType(value)} /><label htmlFor='type1' className='armyCenter'>공군</label>
                 <input type='radio' name='type' id='type2' value='해군' onChange={({ target: { value } }) => setType(value)} /><label htmlFor='type2' className='armyRight'>해군</label>
               </div>
               <div className={'input'}>
-                <input type='tel' maxLength={10} placeholder="군번" onChange={({ target: { value } }) => {
+                <input className={'id'} type='tel' maxLength={10} placeholder="군번" onChange={({ target: { value } }) => {
                   setNumber(value)
                 }} />
-                <span className={'vali'}>{number === 'fail' && '올바른 군번이 아닙니다'}</span>
               </div>
               <div className={'input'}>
-                <input type='tel' maxLength={10} placeholder="비밀번호" onChange={({ target: { value } }) => {
+                <input className={'pw'} type='tel' maxLength={10} placeholder="비밀번호" onChange={({ target: { value } }) => {
                   setPw(value)
                 }} />
-                <span className={'vali'}>{pw === 'fail' ? '비밀번호를 입력하세요' : pw === 'same' && '비밀번호가 일치하지 않습니다'}</span>
+                <span className={'vali'}>{number === 'fail' ? '올바른 군번이 아닙니다' : pw === 'fail' ? '비밀번호를 입력하세요' : pw === 'same' && '비밀번호가 일치하지 않습니다'}</span>
               </div>
             </div>
             <div className='controll'>
-              <button onClick={() => {
-                onCheck(number)
-              }}>조회</button>
+              {
+                number === 'admin' && pw === 'admin' ? (
+                  <Link className={'button'} to='./result'>통계</Link>
+                ) : (
+                  <button className={'button'} disabled={type ? false : true} onClick={() => {
+                    onCheck(number)
+                  }}>확인</button>
+                )
+              }
             </div>
           </div>
           : data && data.length > 0 ?
             <div className='user'>
-              <h2>{!state ? '신청 내역이 있습니다' : '신청완료되었습니다'}</h2>
+              <h2 className='title'>
+                {!state ? <i className="ri-user-add-line"></i>: <i className="ri-user-follow-line"></i>}
+                {!state ? '신청하신 내역이 있습니다' : '개인별 사이즈 신청 완료하였습니다'}
+              </h2>
               <div className='comment'>{!state ? '사이즈를 변경하시려면 아래의 재신청을 누르세요' : '수고하셨습니다'}</div>
               <div className='controll'>
                 <button className='buttonLeft' onClick={() => {
@@ -122,7 +121,9 @@ const App = (props) => {
             :
             <div className='order'>
               <div>
-                <h2 className='title'>{type}소속 {number}님 안녕하세요<br />신체 사이즈에 맞게 선택해주세요</h2>
+                <h2 className='title'>
+                  <div className='profile'><i className="ri-shield-user-line"></i> 안녕하세요 {type}소속 {number}님</div>
+                </h2>
                 <div className='accordion'>
                   <div className='accordionItem'>
                     <h3 className='accordionHead' onClick={() => { setActive(0) }}>보호의{armor ? ' "' + armor + '" 를 선택하였습니다' : '를 선택하세요'}</h3>
@@ -163,8 +164,8 @@ const App = (props) => {
                 </div>
               </div>
               <div className='controll'>
-                <p>{armor && shoes && gloves && mask && '선택하신 사이즈로 신청하시겠습니까'}</p>
-                <button disabled={!armor || !shoes || !gloves || !mask} onClick={() => {
+                <p>{armor && shoes && gloves && mask ? '선택하신 사이즈로 신청하시겠습니까' : '본인의 사이즈에 맞게 선택해주세요'}</p>
+                <button className={'button'} disabled={!armor || !shoes || !gloves || !mask} onClick={() => {
                   onSave()
                 }}>신청</button>
               </div>
