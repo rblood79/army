@@ -3,7 +3,6 @@ import 'remixicon/fonts/remixicon.css'
 import React, { useState, useEffect } from 'react';
 
 import { query, where, getDocs } from 'firebase/firestore';
-import Head from '../component/Head';
 const App = (props) => {
   const [data, setData] = useState(null);
   const [result, setResult] = useState(

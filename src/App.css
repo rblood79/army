@@ -211,7 +211,7 @@
 }
 
 .accordion {
-  border: 1px solid #343434;
+  border: 2px solid #343434;
   border-radius: 16px;
   overflow: hidden;
 }
@@ -245,7 +245,8 @@
 }
 
 .accordionBodyActive {
-  height: 342px;
+  /*height: 342px;
+  height: fit-content;*/
   opacity: 1;
   transition: all 0.3s ease-in-out;
 }
@@ -276,6 +277,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  position: relative;
 }
 
 .label:last-child {
@@ -295,7 +297,7 @@
 .accordionItem input[type='radio']:checked+label:after {
   content: url('./page/check-line.png');
   position: absolute;
-  right: 24px;
+  right: 16px;
 }
 
 .armySelect {
@@ -341,21 +343,17 @@
   background-color: #efefef;
 }
 
-.armySelect input[type='radio']:checked+label:after {
+/*.armySelect input[type='radio']:checked+label:after {
   content: url('./page/check-line.png');
   position: absolute;
   top: 8px;
+}*/
+
+.armySelect input[type='radio']:checked+ label {
+  background-color: #343434;
+  color: #fff;
 }
 
-.armySelect input[type='radio']:checked+.armyLeft {
-  background-color: #06799b;
-}
-.armySelect input[type='radio']:checked+.armyCenter {
-  background-color: #0f60ca;
-}
-.armySelect input[type='radio']:checked+.armyRight {
-  background-color: #79dbff;
-}
 
 .resultHead {
   display: flex;
@@ -365,6 +363,7 @@
 }
 
 .total {
+  margin-top: 48px;
   margin-bottom: 48px;
 }
 
