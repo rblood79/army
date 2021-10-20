@@ -40,9 +40,9 @@ const App = (props) => {
   }, [])
   return (
     <div className={isMobile ? "App mobile" : "App"}>
-      {props.location.pathname === '/home' ?  <div /> : props.location.pathname === '/result' &&  <Head />}
+      {props.location.pathname === '/' ?  <div /> : props.location.pathname === '/result' &&  <Head />}
       <main className='main'>
-        <Route exact path="/home" render={() => <Home user={usersRef} />} />
+        <Route exact path="/" render={() => <Home user={usersRef} />} />
         <Route path="/result" render={() => <Result user={usersRef} />} />
       </main>
       <Foot />
