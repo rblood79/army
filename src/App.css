@@ -140,7 +140,7 @@
 
 .login, .order, .user {
   border: 0px solid #f00;
-  width: 375px;
+  width: 328px;
   max-width: 100%;
   height: 100%;
   display: flex;
@@ -385,6 +385,7 @@
   flex-direction: row;
   height: 36px !important;
   cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.016);
 }
 
 .buttonGroup button i {
@@ -412,6 +413,7 @@
   flex-direction: column;
   color: #a7a7a7;
   cursor: pointer;
+  border-radius: 0;
 }
 
 .nav .navButton i {
