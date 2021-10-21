@@ -7,7 +7,7 @@ const App = (props) => {
   }
   return (
     <header className="head">
-      <span className='headTitle'>국방부 화생방 보호의신청</span>
+      <span className='headTitle'><img src='./mnd_logo_signature.png' alt='국방부'/></span>
       { !isMobile &&
         <nav className='nav'>
           <NavLink className='navButton' exact to="/result"><i className="ri-pie-chart-2-fill"></i>현황</NavLink>

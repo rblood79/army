@@ -66,7 +66,7 @@ const App = (props) => {
       {
         (!data) ?
           <div className='login'>
-            <h2><div className='appIcon'><img src={'./mnd.gif'} alt='국방부' /></div>화생방 보호의 신청</h2>
+            <h2><div className='appIcon'><img src={'./mask.png'} alt='화생방' /></div><span className='subTitle'>화생방 보호의 신청</span></h2>
             <div>
               {
                 props.mobile &&
@@ -95,7 +95,7 @@ const App = (props) => {
             <div className='controll'>
               {
                 !props.mobile ? (
-                  <Link className={'button'} to={number === 'admin' && pw === 'admin' ? './result' : '/'}>종합현황</Link>
+                  <Link className={'button'} to={number === 'admin' && pw === 'admin' ? './result' : '/'}>로그인</Link>
                 ) : (
                   <button className={'button'} disabled={!props.mobile ? false : type ? false : true} onClick={() => {
                     onCheck(number)

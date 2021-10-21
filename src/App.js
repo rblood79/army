@@ -40,7 +40,7 @@ const App = (props) => {
   }, [])
   return (
     <div className={isMobile ? "App mobile" : "App"}>
-      {props.location.pathname === '/' ?  <div /> : props.location.pathname === '/result' &&  <Head />}
+      {props.location.pathname === '/' ?  <div className='headM'><img src='./mnd_logo_signature.png' alt='국방부'/></div> : props.location.pathname === '/result' &&  <Head />}
       <main className='main' style={{flex: props.location.pathname === '/result' && 1}}>
         <Route exact path="/" render={() => <Home user={usersRef} mobile={isMobile}/>} />
         <Route path="/result" render={() => <Result user={usersRef} />} />

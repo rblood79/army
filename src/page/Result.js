@@ -146,6 +146,7 @@ const App = (props) => {
         <div className='resultHead'>
           <h2 className='title'>종합소요 현황</h2>
           <div className='buttonGroup'>
+            <button onClick={onLoad}><i className="ri-refresh-line"></i>재조회</button>
             <button onClick={test}><i className="ri-folder-upload-line"></i>소요현황 업로드</button>
             <button onClick={test}><i className="ri-folder-download-line"></i>부대별 현황 다운로드</button>
             <button onClick={test}><i className="ri-printer-line"></i>인쇄</button>
