@@ -2,7 +2,7 @@
 import { isMobile } from 'react-device-detect';
 import { Route } from "react-router-dom";
 import './App.css';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect} from 'react';
 
 
 import Head from './component/Head';
@@ -36,13 +36,13 @@ const usersRef = collection(db, "users");
 
 const App = (props) => {
   useEffect(() => {
-    console.log(props.location.pathname)
+    //console.log(props.location.pathname)
   }, [])
   return (
     <div className={isMobile ? "App mobile" : "App"}>
       {props.location.pathname === '/' ?  <div /> : props.location.pathname === '/result' &&  <Head />}
-      <main className='main'>
-        <Route exact path="/" render={() => <Home user={usersRef} />} />
+      <main className='main' style={{flex: props.location.pathname === '/result' && 1}}>
+        <Route exact path="/" render={() => <Home user={usersRef} mobile={isMobile}/>} />
         <Route path="/result" render={() => <Result user={usersRef} />} />
       </main>
       <Foot />
