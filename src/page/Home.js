@@ -66,7 +66,7 @@ const App = (props) => {
       {
         (!data) ?
           <div className='login'>
-            <h2><div className='appIcon'><img src={'./mask.png'} alt='화생방' /></div><span className='subTitle'>화생방 보호의 신청</span></h2>
+            <h2><div className='appIcon'><img src={'./mask.png'} alt='화생방' /></div><span className='subTitle'>화생방 보호의 신청{!props.mobile && ' 관리'}</span></h2>
             <div>
               {
                 props.mobile &&
@@ -110,7 +110,7 @@ const App = (props) => {
                 {!state ? <i className="ri-user-add-line"></i> : <i className="ri-user-follow-line"></i>}
                 {!state ? '신청하신 내역이 있습니다' : '개인별 사이즈 신청 완료하였습니다'}
               </h2>
-              <div className='comment'>{!state ? '사이즈를 변경하시려면 아래의 재신청을 누르세요' : '수고하셨습니다'}</div>
+              <div className='comment'>{!state ? '사이즈를 변경하시려면 재신청을 누르세요' : '수고하셨습니다'}</div>
               <div className='controll'>
                 <button className='buttonLeft' onClick={() => {
                   setArmor(null)
