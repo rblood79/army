@@ -371,7 +371,7 @@
   align-items: center;
 }
 
-.total {
+.total, .users {
   margin-top: 48px;
   margin-bottom: 48px;
 }

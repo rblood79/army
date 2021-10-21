@@ -233,7 +233,7 @@ const App = (props) => {
         </div>
       </div>
 
-      <div>
+      <div className='users'>
         <div className='resultHead'>
           <h2 className='title'>신청자 현황</h2>
           <div className='buttonGroup'>
