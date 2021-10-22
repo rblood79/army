@@ -3,7 +3,7 @@
 
 const App = (props) => {
     return (
-      <footer className="foot">
+      <footer className={props.position === 'fix' ? "foot active" : "foot"}>
          ministry of national defense.
       </footer>
     );
