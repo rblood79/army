@@ -5,11 +5,9 @@
   align-items: center;
   flex-direction: column;
   min-height: 100%;
+  background-image: url("./page/ptn.png");
+  background-attachment: fixed;
   background-position: center;
-}
-
-.App.mobile {
-  padding: 0 16px;
 }
 
 .head {
@@ -35,11 +33,6 @@
   width: 100%;
   color: #ccc;
   z-index: 1;
-}
-
-.foot.active {
-  position: absolute;
-  bottom: 0;
 }
 
 .headTitle {
@@ -75,13 +68,6 @@
 .main {
   width: 100%;
   flex: 1;
-  z-index: 1;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
 }
 
 .App-link {
@@ -168,38 +154,38 @@
   color: #900;
 }
 
-.login, .order, .user {
+.login,
+.order,
+.user {
   width: 328px;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  background-size: contain;
-  background-position-x: center;
-  background-position-y: bottom;
-  background-repeat: no-repeat;
-  padding-bottom: 36px;
+  position: relative;
 }
 
-.headM:after {
-  /*content: '';*/
+
+
+.login:after {
+  content: '';
   position: absolute;
-  background-color: #ffc107;
-  border: 1px solid rgba(0, 0, 0, 0.16);
-  border-bottom-left-radius: 16px;
-  border-bottom-right-radius: 16px;
+  bottom: -36px;
+  height: 100%;
+  width: 100%;
+  left: 0;
   z-index: 0;
-  width: calc(100% - 32px);
-  height: calc(100% - 267px);
-  height: calc(100% - 154px);
-  top: 0;
+  background-image: url("./page/sorder0.png");
+  background-position: center bottom;
+  background-repeat:  no-repeat;
+  background-size: contain;
 }
-
 .order {
   justify-content: space-between;
 }
 
-.login h2, .user h2 {
+.login h2,
+.user h2 {
   flex: 1;
   display: flex;
   justify-content: center;
@@ -208,6 +194,7 @@
   font-size: 16px;
   font-weight: 400;
   margin: 0;
+  z-index: 1;
 }
 
 .App .login h2 {
@@ -221,7 +208,7 @@
 }
 
 .login .subTitle {
-  border: 8px solid #E67E22;
+  border: 8px solid #e67e22;
   padding: 8px 32px;
   border-radius: 36px;
   background-color: #343434;
@@ -246,10 +233,6 @@
   height: 100%;
 }
 
-/*.App.mobile .container {
-  padding: 0 16px;
-}*/
-
 .comment {
   padding: 16px;
 }
@@ -273,6 +256,7 @@
   border: 2px solid #343434;
   border-radius: 16px;
   overflow: hidden;
+  margin-top: 16px;
 }
 
 .accordionItem {
@@ -313,6 +297,7 @@
 .controll {
   display: flex;
   flex-direction: row;
+  z-index: 1;
 }
 
 .order .controll {
@@ -331,7 +316,8 @@
 
 .label {
   border-bottom: 1px solid rgba(0, 0, 0, 0.01);
-  height: 42px;
+  background-color: #fff;
+  height: 48px;
   padding: 0 16px;
   display: flex;
   justify-content: flex-start;
@@ -348,24 +334,27 @@
 }
 
 .label span:first-child::after {
-  content: '·';
+  content: "·";
   padding: 0 8px;
 }
 
-.accordionItem input[type='radio']:checked+label {
+.accordionItem input[type="radio"]:checked + label {
   background-color: #343434;
 }
 
-.accordionItem input[type='radio']:checked+label span {
+.accordionItem input[type="radio"]:checked + label span {
   color: #fff;
 }
 
-.accordionItem input[type='radio']:checked+label:after {
-  content: url('./page/check-line.png');
+.accordionItem input[type="radio"]:checked + label:after {
+  content: url("./page/check-line.png");
   position: absolute;
   right: 16px;
 }
 
+.armyWrap {
+  z-index: 1;
+}
 .armyComment {
   color: #c79a16;
   font-weight: 900;
@@ -375,7 +364,7 @@
 
 .armyComment i {
   font-size: 28px;
-  color: #E67E22;
+  color: #e67e22;
 }
 
 .armySelect {
@@ -409,7 +398,7 @@
   border: 1px solid rgba(0, 0, 0, 0.16);
 }
 
-.armySelect+.input input {
+.armySelect + .input input {
   border-radius: 0;
 }
 
@@ -440,7 +429,7 @@
   top: 8px;
 }*/
 
-.armySelect input[type='radio']:checked+label {
+.armySelect input[type="radio"]:checked + label {
   background-color: #343434;
   color: #ffc107;
 }
@@ -452,7 +441,8 @@
   align-items: center;
 }
 
-.total, .users {
+.total,
+.users {
   margin-top: 48px;
   margin-bottom: 48px;
 }
@@ -551,7 +541,7 @@ tbody tr:hover {
 .back i {
   font-size: 28px;
   margin-right: 4px;
-  color: #E67E22;
+  color: #e67e22;
 }
 
 .back span {
@@ -559,8 +549,32 @@ tbody tr:hover {
   line-height: 21px;
 }
 
-@media (max-width: 425px) {
-  .login, .order, .user {
+@media (max-width: 424.9px) {
+  .App {
+    padding: 0 16px;
+  }
+  
+  .App .login:before {
+    content: '';
+    position: absolute;
+    background-color: #ffc107;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    z-index: 0;
+    width: 100%;
+    height: calc(100% - 267px);
+    height: calc(100% - 182px);
+    top: -48px;
+  }
+
+  .login,
+  .order,
+  .user {
     width: 100%;
   }
+}
+
+@media (min-width: 425px) {
+  
 }

@@ -39,7 +39,7 @@ const App = (props) => {
     //console.log(props.location.pathname)
   }, [])
   return (
-    <div className={isMobile ? "App mobile" : "App"} style={{backgroundImage: `url(ptn.png)`, height: props.location.pathname === '/' && '100%'}}>
+    <div className={isMobile ? "App mobile" : "App"} style={{height: props.location.pathname === '/' && '100%'}}>
       {props.location.pathname === '/' ?  <div className='headM'><img src='./mnd_logo_signature.png' alt='국방부'/></div> : props.location.pathname === '/result' &&  <Head />}
       <main className='main' style={{flex: props.location.pathname === '/result' && 1}}>
         <Route exact path="/" render={() => <Home user={usersRef} mobile={isMobile}/>} />
