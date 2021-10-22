@@ -104,13 +104,13 @@
 .table th {
   border: 1px solid rgba(0, 0, 0, 0.18);
   padding: 4px;
-  height: 31px;
+  height: 48px;
 }
 
 .table td {
   border: 1px solid rgba(0, 0, 0, 0.18);
   padding: 4px;
-  height: 31px;
+  height: 48px;
 }
 
 .table .sum {
