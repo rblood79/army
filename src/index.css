@@ -24,7 +24,7 @@ button {
   height: 48px !important;
 }
 .button, .buttonLeft, .buttonRight {
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.16);
   background-color: #ffc107;
   color: #343434;
   width: 100%;

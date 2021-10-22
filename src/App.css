@@ -161,11 +161,10 @@
   height: 36px;
   display: flex;
   align-items: center;
-  color: #f00;
+  color: #900;
 }
 
 .login, .order, .user {
-  border: 0px solid #f00;
   width: 328px;
   height: 100%;
   display: flex;
@@ -184,8 +183,8 @@
 }
 
 .login .appIcon {
-  width: 240px;
-  height: 240px;
+  width: 180px;
+  height: 180px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -195,6 +194,7 @@
 
 .login .appIcon img {
   width: 100%;
+  opacity: 0.79;
 }
 
 .login .subTitle {
@@ -316,6 +316,10 @@
   position: relative;
 }
 
+.label span {
+  color: #7a7a7a;
+}
+
 .label:last-child {
   border-bottom: 0;
 }
@@ -327,6 +331,9 @@
 
 .accordionItem input[type='radio']:checked+label {
   background-color: #343434;
+}
+
+.accordionItem input[type='radio']:checked+label span {
   color: #fff;
 }
 
@@ -342,49 +349,57 @@
   justify-content: center;
   margin-top: 8px;
   position: relative;
-  border: 1px solid rgba(0, 0, 0, 0.24);
+  /*border: 0px solid rgba(0, 0, 0, 0.24);*/
   border-radius: 8px;
   overflow: hidden;
+  width: 100%;
+}
+
+.armySelect.active{
   border-bottom: 0;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-  width: 100%;
-  margin-left: -1px;
+}
+
+.armySelect label {
+  font-size: 16px;
+  font-weight: bold;
+  width: 33.3333%;
+  height: 46px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffc107;
+  color: #343434;
+  border: 1px solid rgba(0, 0, 0, 0.16);
 }
 
 .armySelect+.input input {
   border-radius: 0;
 }
 
-.armyLeft {
+.armySelect .armyLeft {
   border-right: none;
-  width: 33.3333%;
-  height: 48px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #efefef;
+  
+  border-right: 0;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
 }
 
-.armyCenter {
+.armySelect .armyCenter {
   border-right: none;
   border-left: none;
-  width: 33.3333%;
-  height: 48px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #efefef;
+  
+  border-left: 0;
+  border-right: 0;
 }
 
-.armyRight {
+.armySelect .armyRight {
   border-left: none;
-  width: 33.3333%;
-  height: 48px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #efefef;
+  
+  border-left: 0;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 
 /*.armySelect input[type='radio']:checked+label:after {
@@ -395,7 +410,7 @@
 
 .armySelect input[type='radio']:checked+label {
   background-color: #343434;
-  color: #fff;
+  color: #ffc107;
 }
 
 .resultHead {
@@ -489,6 +504,26 @@ tbody tr:hover {
   margin-right: 8px;
   font-size: 21px;
 }
+
+.back {
+  background-color: transparent;
+  border: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.back i{
+  font-size: 21px;
+  margin-right: 4px;
+}
+
+.back span{
+  font-size: 16px;
+  line-height: 21px;
+}
+
 
 @media (max-width: 425px) {
   .login, .order, .user {

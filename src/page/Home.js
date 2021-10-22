@@ -69,34 +69,39 @@ const App = (props) => {
             <h2><div className='appIcon'><img src={'./mask.png'} alt='화생방' /></div><span className='subTitle'>화생방 보호의 신청{!props.mobile && ' 관리'}</span></h2>
             <div>
               {
-                props.mobile &&
+                props.mobile && !type ?
                 <>
-                  <div>소속을 선택하세요</div>
-                  <div className='armySelect'>
+                  <div>소속군을 선택하세요</div>
+                  <div className={type ? 'armySelect active' : 'armySelect'}>
                     <input type='radio' name='type' id='type0' value='육군' onChange={({ target: { value } }) => setType(value)} /><label htmlFor='type0' className='armyLeft'>육군</label>
                     <input type='radio' name='type' id='type1' value='공군' onChange={({ target: { value } }) => setType(value)} /><label htmlFor='type1' className='armyCenter'>공군</label>
                     <input type='radio' name='type' id='type2' value='해군' onChange={({ target: { value } }) => setType(value)} /><label htmlFor='type2' className='armyRight'>해군</label>
                   </div>
+                </> : props.mobile &&
+                <button className='back' onClick={()=>{setType(null)}}><i className="ri-arrow-left-line"></i><span>이전</span></button>
+              }
+              {
+                (!props.mobile || type) && 
+                <>
+                  <div className={'input'}>
+                    <input className={'id'} type='tel' maxLength={10} placeholder="아이디" onChange={({ target: { value } }) => {
+                      setNumber(value)
+                    }} />
+                  </div>
+                  <div className={'input'}>
+                    <input className={'pw'} type='tel' maxLength={10} placeholder="비밀번호" onChange={({ target: { value } }) => {
+                      setPw(value)
+                    }} />
+                    <span className={'vali'}>{number === 'fail' ? '올바른 아이디가 아닙니다' : pw === 'fail' ? '비밀번호를 입력하세요' : pw === 'same' && '비밀번호가 일치하지 않습니다'}</span>
+                  </div>
                 </>
               }
-
-              <div className={'input'}>
-                <input className={'id'} type='tel' maxLength={10} placeholder="아이디" onChange={({ target: { value } }) => {
-                  setNumber(value)
-                }} />
-              </div>
-              <div className={'input'}>
-                <input className={'pw'} type='tel' maxLength={10} placeholder="비밀번호" onChange={({ target: { value } }) => {
-                  setPw(value)
-                }} />
-                <span className={'vali'}>{number === 'fail' ? '올바른 아이디가 아닙니다' : pw === 'fail' ? '비밀번호를 입력하세요' : pw === 'same' && '비밀번호가 일치하지 않습니다'}</span>
-              </div>
             </div>
             <div className='controll'>
               {
                 !props.mobile ? (
                   <Link className={'button'} to={number === 'admin' && pw === 'admin' ? './result' : '/'}>로그인</Link>
-                ) : (
+                ) : type && (
                   <button className={'button'} disabled={!props.mobile ? false : type ? false : true} onClick={() => {
                     onCheck(number)
                   }}>확인</button>
@@ -122,6 +127,7 @@ const App = (props) => {
                 }}>재신청</button>
                 <button className='buttonRight' onClick={() => {
                   setData(null)
+                  setType(null)
                   setNumber(null)
                   setPw(null)
                   setArmor(null)
