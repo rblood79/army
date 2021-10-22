@@ -6,6 +6,8 @@
   flex-direction: column;
   /*justify-content: center;*/
   min-height: 100%;
+  /*background-image: url('page/ptn.png');*/
+  background-position: center;
 }
 
 .App.mobile {
@@ -101,6 +103,7 @@
   border-collapse: collapse;
   table-layout: fixed;
   border: 2px solid #000;
+  background-color: #fff;
 }
 
 .table thead {
@@ -182,6 +185,14 @@
   font-weight: 400;
 }
 
+.login h2 {
+  margin-bottom: 36px;
+}
+
+.App.mobile .login h2 {
+  margin-bottom: 0;
+}
+
 .login .appIcon {
   width: 180px;
   height: 180px;
@@ -232,7 +243,7 @@
 }
 
 .title {
-  padding: 8px 0;
+  padding: 6px 0;
   margin: 0;
   font-size: 18px;
   font-weight: 600;
@@ -355,7 +366,7 @@
   width: 100%;
 }
 
-.armySelect.active{
+.armySelect.active {
   border-bottom: 0;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
@@ -380,7 +391,6 @@
 
 .armySelect .armyLeft {
   border-right: none;
-  
   border-right: 0;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
@@ -389,14 +399,12 @@
 .armySelect .armyCenter {
   border-right: none;
   border-left: none;
-  
   border-left: 0;
   border-right: 0;
 }
 
 .armySelect .armyRight {
   border-left: none;
-  
   border-left: 0;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
@@ -431,6 +439,7 @@
   border-radius: 16px;
   overflow: hidden;
   border: 1px solid rgba(0, 0, 0, 0.16);
+  background-color: #fff;
 }
 
 .buttonGroup button {
@@ -514,16 +523,15 @@ tbody tr:hover {
   align-items: center;
 }
 
-.back i{
+.back i {
   font-size: 21px;
   margin-right: 4px;
 }
 
-.back span{
+.back span {
   font-size: 16px;
   line-height: 21px;
 }
-
 
 @media (max-width: 425px) {
   .login, .order, .user {
