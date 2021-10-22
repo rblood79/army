@@ -194,8 +194,8 @@
 }
 
 .login .appIcon {
-  width: 180px;
-  height: 180px;
+  /*width: 180px;
+  height: 180px;*/
   display: flex;
   justify-content: center;
   align-items: center;
@@ -205,7 +205,7 @@
 
 .login .appIcon img {
   width: 100%;
-  opacity: 0.79;
+  opacity: 1;
 }
 
 .login .subTitle {
