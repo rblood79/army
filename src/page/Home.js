@@ -66,7 +66,7 @@ const App = (props) => {
       {
         (!data) ?
           <div className='login'>
-            <h2 style={{paddingBottom: type && '175px'}}><span className='subTitle'>화생방 보호의 신청{!props.mobile && ' 관리'}</span></h2>
+            <h2><div className='subTitle'><span>화생방 보호의 신청{!props.mobile && '관리'}</span></div></h2>
             <div className='armyWrap'>
               {
                 props.mobile && !type ?

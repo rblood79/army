@@ -45,7 +45,7 @@ const App = (props) => {
         <Route exact path="/" render={() => <Home user={usersRef} mobile={isMobile}/>} />
         <Route path="/result" render={() => <Result user={usersRef} />} />
       </main>
-      <Foot position={props.location.pathname === '/' && 'fix'}/>
+      <Foot />
     </div>
   );
 }

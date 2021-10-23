@@ -133,17 +133,27 @@
   text-indent: 16px;
   border-radius: 8px;
   border: 1px solid #ccc;
+  transition: all 0.3s ease-in-out;
+}
+
+.input input:focus {
+  z-index: 1;
+  border: 1px solid #e67e22;
+  box-shadow: 0 0 1px #ffc107;
 }
 
 .input .id {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-  border-bottom: 0;
 }
 
 .input .pw {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+.input + .input {
+  margin-top: -1px;
 }
 
 .vali {
@@ -165,10 +175,8 @@
   position: relative;
 }
 
-
-
 .login:after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -36px;
   height: 100%;
@@ -177,7 +185,7 @@
   z-index: 0;
   background-image: url("./page/sorder0.png");
   background-position: center bottom;
-  background-repeat:  no-repeat;
+  background-repeat: no-repeat;
   background-size: contain;
 }
 .order {
@@ -199,20 +207,44 @@
 
 .App .login h2 {
   justify-content: flex-end;
-  padding-bottom: 200px;
 }
 
 .App.mobile .login h2 {
   justify-content: flex-end;
-  padding-bottom: 300px;
 }
 
 .login .subTitle {
   border: 8px solid #e67e22;
-  padding: 8px 32px;
-  border-radius: 36px;
+  border-radius: 16px;
   background-color: #343434;
   color: #ffc107;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: calc(50% - 181px);
+  width: 128px;
+  height: 128px;
+  transform: rotate(45deg);
+}
+
+.login .subTitle::before {
+  content: "";
+  position: absolute;
+  width: 112px;
+  height: 112px;
+  opacity: 0.3;
+  transform: rotate(-45deg);
+  background-image: url("./page/mask.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.login .subTitle span {
+  height: 21px;
+  text-shadow: 0 0 4px #000;
+  word-break: keep-all;
+  transform: rotate(-45deg);
 }
 
 .user .title {
@@ -276,7 +308,7 @@
   justify-content: space-between;
   align-items: center;
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 900;
 }
 
 .accordionBody {
@@ -360,6 +392,7 @@
   font-weight: 900;
   display: flex;
   flex-direction: column;
+  text-shadow: 0 0 4px #000;
 }
 
 .armyComment i {
@@ -498,7 +531,7 @@
 }
 
 .nav .navButton i {
-  font-size: 18px;
+  font-size: 21px;
   margin-bottom: 4px;
   color: #a7a7a7;
 }
@@ -553,9 +586,9 @@ tbody tr:hover {
   .App {
     padding: 0 16px;
   }
-  
+
   .App .login:before {
-    content: '';
+    content: "";
     position: absolute;
     background-color: #ffc107;
     border: 1px solid rgba(0, 0, 0, 0.16);
@@ -576,5 +609,4 @@ tbody tr:hover {
 }
 
 @media (min-width: 425px) {
-  
 }
