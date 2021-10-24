@@ -211,7 +211,7 @@
   justify-content: flex-end;
 }
 
-.login .subTitle {
+.login .subIcon {
   border: 8px solid #e67e22;
   border-radius: 0px;
   background-color: #343434;
@@ -224,9 +224,10 @@
   width: 96px;
   height: 96px;
   transform: rotate(45deg);
+  transform-origin: center;
 }
 
-.login .subTitle::before {
+.login .subIcon::before {
   content: "";
   position: absolute;
   width: 84px;
@@ -238,22 +239,29 @@
   background-size: cover;
 }
 
-.login .subTitle span {
+.login .subTitle {
+  position: fixed;
   word-break: keep-all;
-  transform: rotate(-45deg);
-  margin-top: 120px;
-  margin-left: 120px;
-  width: max-content;
-  position: absolute;
-  font-weight: 900;
+  top: calc(50% - 98px);
   color: #8B5600;
+  font-weight: 900;
+  text-align: center;
+}
+
+.user .subTitle {
+  position: fixed;
+  word-break: keep-all;
+  top: calc(50% + 32px);
+  color: #8B5600;
+  font-weight: 900;
+  text-align: center;
 }
 
 .user .title {
   color: #343434;
 }
 
-.user .subTitle {
+.user .subIcon {
   border: 8px solid #e67e22;
   border-radius: 0px;
   background-color: #343434;
@@ -268,21 +276,10 @@
   top: calc(50% - 82px);
 }
 
-.user .subTitle i {
+.user .subIcon i {
   transform: rotate(-45deg);
   color: #fff;
   font-size: 36px;
-}
-
-.user .subTitle span {
-  word-break: keep-all;
-  transform: rotate(-45deg);
-  margin-top: 120px;
-  margin-left: 120px;
-  width: max-content;
-  position: absolute;
-  font-weight: 900;
-  color: #8B5600;
 }
 
 .container {
@@ -320,7 +317,8 @@
 }
 
 .accordionItem {
-  border-bottom: 1px solid #aaa;
+  /*border-bottom: 1px solid #aaa;*/
+  box-shadow: 0 1px 2px #000;
 }
 
 .accordionItem:last-child {
@@ -334,7 +332,7 @@
   height: 48px;
   padding: 0 16px;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   font-size: 14px;
   font-weight: 900;
@@ -343,7 +341,16 @@
 .accordionHead.active {
   background-color: #E67E22;
   color: #fff;
-  text-shadow: 0 0 2px rgba(0,0,0,0.69);
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.69);
+}
+
+.accordionNum {
+  margin-right: 8px;
+  color: #e67e22;
+}
+
+.accordionHead.active .accordionNum {
+  color: #fff;
 }
 
 .accordionBody {
@@ -465,7 +472,7 @@
   align-items: center;
   background-color: #eca800;
   color: #fff;
-  text-shadow: 0 0 4px rgba(0,0,0,0.69);
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.69);
   border: 1px solid rgba(0, 0, 0, 0.16);
 }
 
@@ -617,6 +624,7 @@ tbody tr:hover {
 .back span {
   font-size: 16px;
   line-height: 21px;
+  color: #343434;
 }
 
 @media (max-width: 424.9px) {
@@ -626,7 +634,7 @@ tbody tr:hover {
   .App .login:before {
     content: "";
     position: absolute;
-    background: linear-gradient(145deg, rgba(254,184,47,1) 0%, rgba(221,150,10,1) 100%);
+    background: linear-gradient(145deg, rgba(254, 184, 47, 1) 0%, rgba(221, 150, 10, 1) 100%);
     border: 1px solid rgba(0, 0, 0, 0.16);
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;
@@ -635,9 +643,6 @@ tbody tr:hover {
     height: calc(100% - 267px);
     height: calc(100% - 182px);
     top: -48px;
-  }
-  .login .subTitle {
-    /*top: calc(50% - 218px - 68px);*/
   }
   .login, .order, .user {
     width: 100%;
