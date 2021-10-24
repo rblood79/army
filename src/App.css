@@ -152,7 +152,7 @@
   border-top-right-radius: 0;
 }
 
-.input + .input {
+.input+.input {
   margin-top: -1px;
 }
 
@@ -164,9 +164,7 @@
   color: #900;
 }
 
-.login,
-.order,
-.user {
+.login, .order, .user {
   width: 328px;
   height: 100%;
   display: flex;
@@ -188,12 +186,12 @@
   background-repeat: no-repeat;
   background-size: contain;
 }
+
 .order {
   justify-content: space-between;
 }
 
-.login h2,
-.user h2 {
+.login h2, .user h2 {
   flex: 1;
   display: flex;
   justify-content: center;
@@ -215,7 +213,7 @@
 
 .login .subTitle {
   border: 8px solid #e67e22;
-  border-radius: 16px;
+  border-radius: 0px;
   background-color: #343434;
   color: #ffc107;
   display: flex;
@@ -223,28 +221,33 @@
   justify-content: center;
   position: fixed;
   top: calc(50% - 181px);
-  width: 128px;
-  height: 128px;
+  width: 96px;
+  height: 96px;
   transform: rotate(45deg);
 }
 
 .login .subTitle::before {
   content: "";
   position: absolute;
-  width: 112px;
-  height: 112px;
-  opacity: 0.3;
+  width: 84px;
+  height: 84px;
+  opacity: 1;
   transform: rotate(-45deg);
-  background-image: url("./page/mask.png");
+  background-image: url("./page/maskw.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .login .subTitle span {
   height: 21px;
-  text-shadow: 0 0 4px #000;
   word-break: keep-all;
   transform: rotate(-45deg);
+  margin-top: 120px;
+  margin-left: 120px;
+  width: 100%;
+  position: absolute;
+  font-weight: 900;
+  color: #8B5600;
 }
 
 .user .title {
@@ -370,15 +373,15 @@
   padding: 0 8px;
 }
 
-.accordionItem input[type="radio"]:checked + label {
+.accordionItem input[type="radio"]:checked+label {
   background-color: #343434;
 }
 
-.accordionItem input[type="radio"]:checked + label span {
+.accordionItem input[type="radio"]:checked+label span {
   color: #fff;
 }
 
-.accordionItem input[type="radio"]:checked + label:after {
+.accordionItem input[type="radio"]:checked+label:after {
   content: url("./page/check-line.png");
   position: absolute;
   right: 16px;
@@ -387,6 +390,7 @@
 .armyWrap {
   z-index: 1;
 }
+
 .armyComment {
   color: #c79a16;
   font-weight: 900;
@@ -431,7 +435,7 @@
   border: 1px solid rgba(0, 0, 0, 0.16);
 }
 
-.armySelect + .input input {
+.armySelect+.input input {
   border-radius: 0;
 }
 
@@ -462,7 +466,7 @@
   top: 8px;
 }*/
 
-.armySelect input[type="radio"]:checked + label {
+.armySelect input[type="radio"]:checked+label {
   background-color: #343434;
   color: #ffc107;
 }
@@ -474,8 +478,7 @@
   align-items: center;
 }
 
-.total,
-.users {
+.total, .users {
   margin-top: 48px;
   margin-bottom: 48px;
 }
@@ -586,7 +589,6 @@ tbody tr:hover {
   .App {
     padding: 0 16px;
   }
-
   .App .login:before {
     content: "";
     position: absolute;
@@ -603,12 +605,9 @@ tbody tr:hover {
   .login .subTitle {
     top: calc(50% - 181px - 45px);
   }
-  .login,
-  .order,
-  .user {
+  .login, .order, .user {
     width: 100%;
   }
 }
 
-@media (min-width: 425px) {
-}
+@media (min-width: 425px) {}
