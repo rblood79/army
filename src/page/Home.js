@@ -70,18 +70,18 @@ const App = (props) => {
             <div className='armyWrap'>
               {
                 props.mobile && !type ?
-                <>
-                  <div className='armyComment'><i className="ri-arrow-down-s-line"></i>소속군을 선택하세요</div>
-                  <div className={type ? 'armySelect active' : 'armySelect'}>
-                    <input type='radio' name='type' id='type0' value='육군' onChange={({ target: { value } }) => setType(value)} /><label htmlFor='type0' className='armyLeft'>육군</label>
-                    <input type='radio' name='type' id='type1' value='공군' onChange={({ target: { value } }) => setType(value)} /><label htmlFor='type1' className='armyCenter'>공군</label>
-                    <input type='radio' name='type' id='type2' value='해군' onChange={({ target: { value } }) => setType(value)} /><label htmlFor='type2' className='armyRight'>해군</label>
-                  </div>
-                </> : props.mobile &&
-                <button className='back' onClick={()=>{setType(null)}}><i className="ri-arrow-left-line"></i><span>이전</span></button>
+                  <>
+                    <div className='armyComment'><i className="ri-arrow-down-s-line"></i>소속군을 선택하세요</div>
+                    <div className={type ? 'armySelect active' : 'armySelect'}>
+                      <input type='radio' name='type' id='type0' value='육군' onChange={({ target: { value } }) => setType(value)} /><label htmlFor='type0' className='armyLeft'>육군</label>
+                      <input type='radio' name='type' id='type1' value='공군' onChange={({ target: { value } }) => setType(value)} /><label htmlFor='type1' className='armyCenter'>공군</label>
+                      <input type='radio' name='type' id='type2' value='해군' onChange={({ target: { value } }) => setType(value)} /><label htmlFor='type2' className='armyRight'>해군</label>
+                    </div>
+                  </> : props.mobile &&
+                  <button className='back' onClick={() => { setType(null) }}><i className="ri-arrow-left-line"></i><span>이전</span></button>
               }
               {
-                (!props.mobile || type) && 
+                (!props.mobile || type) &&
                 <>
                   <div className={'input'}>
                     <input className={'id'} type='tel' maxLength={10} placeholder="아이디" onChange={({ target: { value } }) => {
@@ -112,8 +112,10 @@ const App = (props) => {
           : data && data.length > 0 ?
             <div className='user'>
               <h2 className='title'>
-                {!state ? <i className="ri-user-add-line"></i> : <i className="ri-user-follow-line"></i>}
-                {!state ? '신청하신 내역이 있습니다' : '개인별 사이즈 신청 완료하였습니다'}
+                <div className='subTitle'>
+                  {!state ? <i className="ri-user-add-line"></i> : <i className="ri-user-follow-line"></i>}
+                  <span>{!state ? '신청하신 내역이 있습니다' : '개인별 사이즈 신청 완료하였습니다'}</span>
+                </div>
               </h2>
               <div className='comment'>{!state ? '사이즈를 변경하시려면 재신청을 누르세요' : '수고하셨습니다'}</div>
               <div className='controll'>
@@ -146,8 +148,8 @@ const App = (props) => {
               </h2>*/}
                 <div className='accordion'>
                   <div className='accordionItem'>
-                    <h3 className='accordionHead' onClick={() => { active === 0 ? setActive(null) : setActive(0) }}>보호의{armor ? ' "' + armor + '" 를 선택하였습니다' : '를 선택하세요'}</h3>
-                    <div className={active === 0 ? 'accordionBodyActive' : 'accordionBody'} style={{ height: active === 0 && 48 * 7 }}>
+                    <h3 className={active === 0 ? 'accordionHead active' : 'accordionHead'} onClick={() => { active === 0 ? setActive(null) : setActive(0) }}>보호의{armor ? ' "' + armor + '" 를 선택하였습니다' : '를 선택하세요'}</h3>
+                    <div className={active === 0 ? 'accordionBody active' : 'accordionBody'} style={{ height: active === 0 && 48 * 7 }}>
                       <input type='radio' name='armor' id='armor0' value='특1호' onChange={({ target: { value } }) => setArmor(value)} /><label htmlFor='armor0' className='label'><span>특1호</span><span>신장 191cm이상</span></label>
                       <input type='radio' name='armor' id='armor1' value='1호' onChange={({ target: { value } }) => setArmor(value)} /><label htmlFor='armor1' className='label'><span>1호</span><span>신장 185cm - 190cm</span></label>
                       <input type='radio' name='armor' id='armor2' value='2호' onChange={({ target: { value } }) => setArmor(value)} /><label htmlFor='armor2' className='label'><span>2호</span><span>신장 180cm - 184cm</span></label>
@@ -158,23 +160,23 @@ const App = (props) => {
                     </div>
                   </div>
                   <div className='accordionItem'>
-                    <h3 className='accordionHead' onClick={() => { active === 1 ? setActive(null) : setActive(1) }}>덧신{shoes ? ' "' + shoes + '" 를 선택하였습니다' : '을 선택하세요'}</h3>
-                    <div className={active === 1 ? 'accordionBodyActive' : 'accordionBody'} style={{ height: active === 1 && 48 * 2 }}>
+                    <h3 className={active === 1 ? 'accordionHead active' : 'accordionHead'} onClick={() => { active === 1 ? setActive(null) : setActive(1) }}>덧신{shoes ? ' "' + shoes + '" 를 선택하였습니다' : '을 선택하세요'}</h3>
+                    <div className={active === 1 ? 'accordionBody active' : 'accordionBody'} style={{ height: active === 1 && 48 * 2 }}>
                       <input type='radio' name='shoes' id='shoes0' value='대' onChange={({ target: { value } }) => setShoes(value)} /><label htmlFor='shoes0' className='label'><span>대</span><span>발 270mm이상</span></label>
                       <input type='radio' name='shoes' id='shoes2' value='소' onChange={({ target: { value } }) => setShoes(value)} /><label htmlFor='shoes2' className='label'><span>소</span><span>발 270mm미만</span></label>
                     </div>
                   </div>
                   <div className='accordionItem'>
-                    <h3 className='accordionHead' onClick={() => { active === 2 ? setActive(null) : setActive(2) }}>장갑{gloves ? ' "' + gloves + '" 를 선택하였습니다' : '을 선택하세요'}</h3>
-                    <div className={active === 2 ? 'accordionBodyActive' : 'accordionBody'} style={{ height: active === 2 && 48 * 3 }}>
+                    <h3 className={active === 2 ? 'accordionHead active' : 'accordionHead'} onClick={() => { active === 2 ? setActive(null) : setActive(2) }}>장갑{gloves ? ' "' + gloves + '" 를 선택하였습니다' : '을 선택하세요'}</h3>
+                    <div className={active === 2 ? 'accordionBody active' : 'accordionBody'} style={{ height: active === 2 && 48 * 3 }}>
                       <input type='radio' name='gloves' id='gloves0' value='대' onChange={({ target: { value } }) => setGloves(value)} /><label htmlFor='gloves0' className='label'><span>대</span><span>길이 23cm이상</span></label>
                       <input type='radio' name='gloves' id='gloves1' value='중' onChange={({ target: { value } }) => setGloves(value)} /><label htmlFor='gloves1' className='label'><span>중</span><span>길이 20 - 22cm</span></label>
                       <input type='radio' name='gloves' id='gloves2' value='소' onChange={({ target: { value } }) => setGloves(value)} /><label htmlFor='gloves2' className='label'><span>소</span><span>길이 19cm이하</span></label>
                     </div>
                   </div>
                   <div className='accordionItem'>
-                    <h3 className='accordionHead' onClick={() => { active === 3 ? setActive(null) : setActive(3) }}>방독면{mask ? ' "' + mask + '" 를 선택하였습니다' : '을 선택하세요'}</h3>
-                    <div className={active === 3 ? 'accordionBodyActive' : 'accordionBody'} style={{ height: active === 3 && 48 * 4 }}>
+                    <h3 className={active === 3 ? 'accordionHead active' : 'accordionHead'} onClick={() => { active === 3 ? setActive(null) : setActive(3) }}>방독면{mask ? ' "' + mask + '" 를 선택하였습니다' : '을 선택하세요'}</h3>
+                    <div className={active === 3 ? 'accordionBody active' : 'accordionBody'} style={{ height: active === 3 && 48 * 4 }}>
                       <input type='radio' name='mask' id='mask0' value='특대' onChange={({ target: { value } }) => setMask(value)} /><label htmlFor='mask0' className='label'><span>특대</span><span>XL</span></label>
                       <input type='radio' name='mask' id='mask1' value='대' onChange={({ target: { value } }) => setMask(value)} /><label htmlFor='mask1' className='label'><span>대</span><span>L</span></label>
                       <input type='radio' name='mask' id='mask2' value='중' onChange={({ target: { value } }) => setMask(value)} /><label htmlFor='mask2' className='label'><span>중</span><span>M</span></label>
@@ -184,7 +186,7 @@ const App = (props) => {
                 </div>
               </div>
               <div className='controll'>
-                <p>{armor && shoes && gloves && mask ? '선택하신 사이즈로 신청하시겠습니까' : number+'님 사이즈에 맞게 선택해주세요'}</p>
+                <p>{armor && shoes && gloves && mask ? '선택하신 사이즈로 신청하시겠습니까' : number + '님 사이즈에 맞게 선택해주세요'}</p>
                 <button className={'button'} disabled={!armor || !shoes || !gloves || !mask} onClick={() => {
                   onSave()
                 }}>신청</button>

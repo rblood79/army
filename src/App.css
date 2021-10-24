@@ -5,7 +5,7 @@
   align-items: center;
   flex-direction: column;
   min-height: 100%;
-  background-image: url("./page/ptn.png");
+  background-image: url("./page/ptn3.png");
   background-attachment: fixed;
   background-position: center;
 }
@@ -16,7 +16,7 @@
   align-items: center;
   height: 55px;
   width: 100%;
-  background: #ffc107;
+  background: #eca800;
   position: sticky;
   top: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.16);
@@ -50,7 +50,7 @@
 .headM {
   width: 100%;
   height: 48px;
-  background-color: #ffc107;
+  background-color: #eca800;
   border-bottom: 1px solid rgba(0, 0, 0, 0.16);
   border-radius: 16px;
   border-top-left-radius: 0;
@@ -139,7 +139,7 @@
 .input input:focus {
   z-index: 1;
   border: 1px solid #e67e22;
-  box-shadow: 0 0 1px #ffc107;
+  box-shadow: 0 0 1px #eca800;
 }
 
 .input .id {
@@ -215,12 +215,12 @@
   border: 8px solid #e67e22;
   border-radius: 0px;
   background-color: #343434;
-  color: #ffc107;
+  color: #eca800;
   display: flex;
   align-items: center;
   justify-content: center;
   position: fixed;
-  top: calc(50% - 181px);
+  top: calc(50% - 218px);
   width: 96px;
   height: 96px;
   transform: rotate(45deg);
@@ -239,12 +239,11 @@
 }
 
 .login .subTitle span {
-  height: 21px;
   word-break: keep-all;
   transform: rotate(-45deg);
   margin-top: 120px;
   margin-left: 120px;
-  width: 100%;
+  width: max-content;
   position: absolute;
   font-weight: 900;
   color: #8B5600;
@@ -254,10 +253,36 @@
   color: #343434;
 }
 
-.user .title i {
-  font-size: 48px;
-  color: #ffc107;
-  margin-bottom: 16px;
+.user .subTitle {
+  border: 8px solid #e67e22;
+  border-radius: 0px;
+  background-color: #343434;
+  color: #eca800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  width: 96px;
+  height: 96px;
+  transform: rotate(45deg);
+  top: calc(50% - 82px);
+}
+
+.user .subTitle i {
+  transform: rotate(-45deg);
+  color: #fff;
+  font-size: 36px;
+}
+
+.user .subTitle span {
+  word-break: keep-all;
+  transform: rotate(-45deg);
+  margin-top: 120px;
+  margin-left: 120px;
+  width: max-content;
+  position: absolute;
+  font-weight: 900;
+  color: #8B5600;
 }
 
 .container {
@@ -304,6 +329,7 @@
 
 .accordionHead {
   background-color: #efefef;
+  color: #343434;
   margin: 0;
   height: 48px;
   padding: 0 16px;
@@ -314,6 +340,12 @@
   font-weight: 900;
 }
 
+.accordionHead.active {
+  background-color: #E67E22;
+  color: #fff;
+  text-shadow: 0 0 2px rgba(0,0,0,0.69);
+}
+
 .accordionBody {
   background-color: #efefef;
   overflow: hidden;
@@ -322,7 +354,7 @@
   transition: all 0.3s ease-in-out;
 }
 
-.accordionBodyActive {
+.accordionBody.active {
   /*height: 342px;
   height: fit-content;*/
   opacity: 1;
@@ -343,6 +375,7 @@
   margin-right: 8px;
   background-color: #efefef;
   color: #999;
+  text-shadow: none;
 }
 
 .buttonRight {
@@ -430,8 +463,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #ffc107;
-  color: #343434;
+  background-color: #eca800;
+  color: #fff;
+  text-shadow: 0 0 4px rgba(0,0,0,0.69);
   border: 1px solid rgba(0, 0, 0, 0.16);
 }
 
@@ -468,7 +502,7 @@
 
 .armySelect input[type="radio"]:checked+label {
   background-color: #343434;
-  color: #ffc107;
+  color: #eca800;
 }
 
 .resultHead {
@@ -592,7 +626,7 @@ tbody tr:hover {
   .App .login:before {
     content: "";
     position: absolute;
-    background-color: #ffc107;
+    background: linear-gradient(145deg, rgba(254,184,47,1) 0%, rgba(221,150,10,1) 100%);
     border: 1px solid rgba(0, 0, 0, 0.16);
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;
@@ -603,7 +637,7 @@ tbody tr:hover {
     top: -48px;
   }
   .login .subTitle {
-    top: calc(50% - 181px - 45px);
+    /*top: calc(50% - 218px - 68px);*/
   }
   .login, .order, .user {
     width: 100%;

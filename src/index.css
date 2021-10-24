@@ -30,8 +30,9 @@ button {
 .button, .buttonLeft, .buttonRight {
   outline: 0;
   border: 1px solid rgba(0, 0, 0, 0.16);
-  background-color: #ffc107;
-  color: #343434;
+  background-color: #eca800;
+  color: #fff;
+  text-shadow: 0 0 4px rgba(0,0,0,0.69);
   width: 100%;
   height: 46px;
   border-radius: 8px;
@@ -42,12 +43,12 @@ button {
   justify-content: center;
   text-decoration: none;
   font-family: 'Noto Sans KR', sans-serif;
-  transition: all 0.3s ease-in-out;
 }
 
 .button:disabled {
   background-color: #efefef;
   color: #999;
+  text-shadow: none;
 }
 
 .button:focus {
