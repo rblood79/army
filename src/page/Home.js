@@ -78,8 +78,8 @@ const App = (props) => {
                   <input className={'pw'} type={view ? 'text' : 'password'} maxLength={10} placeholder="비밀번호" onChange={({ target: { value } }) => {
                     setPw(value)
                   }} />
-                  <button className='passView' onClick={()=>{setView(view ? false : true)}}><i className={view ? "ri-eye-line" : "ri-eye-off-line"}></i></button>
-                  <span className={'vali'}>{number === null && pw === null ? '아이디와비번은 군번이며"-"를 제외하고 입력하세요' : number === 'fail' ? '올바른 아이디가 아닙니다' : pw === 'fail' ? '비밀번호를 입력하세요' : pw === 'same' && '비밀번호가 일치하지 않습니다'}</span>
+                  <button className='passView' onClick={()=>{setView(view ? false : true)}}><i className={view ? "ri-eye-off-line" : "ri-eye-line"}></i></button>
+                  <span className={'vali'}>{number === null && pw === null ? '아이디와 비번은 군번이며 "-"를 제외하고 입력하세요' : number === 'fail' ? '올바른 아이디가 아닙니다' : pw === 'fail' ? '비밀번호를 입력하세요' : pw === 'same' && '비밀번호가 일치하지 않습니다'}</span>
                 </div>
               </>
             }

@@ -247,7 +247,7 @@ const App = (props) => {
           <>
             <div className='total'>
               <div className='resultHead'>
-                <h2 className='title'>종합현황 - 화생방(보호의) 물자</h2>
+                <h2 className='title'>종합현황 - 화생방 물자(보호의)</h2>
                 <div className='buttonGroup'>
                   <button onClick={onLoad}><i className="ri-refresh-line"></i></button>
                 </div>
@@ -258,8 +258,6 @@ const App = (props) => {
                     <tr>
                       <th>군</th>
                       <th>소속</th>
-                    </tr>
-                    <tr>
                       <th>특1호</th>
                       <th>1호</th>
                       <th>2호</th>
@@ -308,7 +306,7 @@ const App = (props) => {
 
             <div className='total'>
               <div className='resultHead'>
-                <h2 className='title'>종합현황 - 화생방(덧신) 물자</h2>
+                <h2 className='title'>종합현황 - 화생방 물자(덧신)</h2>
                 <div className='buttonGroup'>
                   <button onClick={onLoad}><i className="ri-refresh-line"></i></button>
                 </div>
@@ -319,8 +317,6 @@ const App = (props) => {
                     <tr>
                       <th>군</th>
                       <th>소속</th>
-                    </tr>
-                    <tr>
                       <th>대</th>
                       <th>소</th>
                       <th className='sum'>소계</th>
@@ -359,7 +355,7 @@ const App = (props) => {
 
             <div className='total'>
               <div className='resultHead'>
-                <h2 className='title'>종합현황 - 화생방(장갑) 물자</h2>
+                <h2 className='title'>종합현황 - 화생방 물자(장갑)</h2>
                 <div className='buttonGroup'>
                   <button onClick={onLoad}><i className="ri-refresh-line"></i></button>
                 </div>
@@ -370,8 +366,6 @@ const App = (props) => {
                     <tr>
                       <th>군</th>
                       <th>소속</th>
-                    </tr>
-                    <tr>
                       <th>대</th>
                       <th>중</th>
                       <th>소</th>
@@ -412,7 +406,7 @@ const App = (props) => {
 
             <div className='total'>
               <div className='resultHead'>
-                <h2 className='title'>종합현황 - 화생방(방독면) 물자</h2>
+                <h2 className='title'>종합현황 - 화생방 물자(방독면)</h2>
                 <div className='buttonGroup'>
                   <button onClick={onLoad}><i className="ri-refresh-line"></i></button>
                 </div>
@@ -423,8 +417,6 @@ const App = (props) => {
                     <tr>
                       <th>군</th>
                       <th>소속</th>
-                    </tr>
-                    <tr>
                       <th>특대</th>
                       <th>대</th>
                       <th>중</th>
