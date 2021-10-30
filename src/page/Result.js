@@ -256,8 +256,8 @@ const App = (props) => {
                 <table className='table'>
                   <thead>
                     <tr>
-                      <th rowSpan='2'>군</th>
-                      <th rowSpan='2'>소속</th>
+                      <th>군</th>
+                      <th>소속</th>
                     </tr>
                     <tr>
                       <th>특1호</th>
@@ -317,8 +317,8 @@ const App = (props) => {
                 <table className='table'>
                   <thead>
                     <tr>
-                      <th rowSpan='2'>군</th>
-                      <th rowSpan='2'>소속</th>
+                      <th>군</th>
+                      <th>소속</th>
                     </tr>
                     <tr>
                       <th>대</th>
@@ -368,8 +368,8 @@ const App = (props) => {
                 <table className='table'>
                   <thead>
                     <tr>
-                      <th rowSpan='2'>군</th>
-                      <th rowSpan='2'>소속</th>
+                      <th>군</th>
+                      <th>소속</th>
                     </tr>
                     <tr>
                       <th>대</th>
@@ -421,8 +421,8 @@ const App = (props) => {
                 <table className='table'>
                   <thead>
                     <tr>
-                      <th rowSpan='2'>군</th>
-                      <th rowSpan='2'>소속</th>
+                      <th>군</th>
+                      <th>소속</th>
                     </tr>
                     <tr>
                       <th>특대</th>
