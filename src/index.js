@@ -7,15 +7,18 @@ import 'react-app-polyfill/stable';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from "react-router-dom";
+import { UserProvider } from './component/Context';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Route path='/:uid?' render={(props) => <App {...props} />} />
-    </BrowserRouter>
+    <UserProvider>
+      <BrowserRouter>
+        <Route path='/:uid?' render={(props) => <App {...props} />} />
+      </BrowserRouter>
+    </UserProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

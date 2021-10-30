@@ -1,19 +1,21 @@
 
 import { isMobile } from 'react-device-detect';
-import { Route } from "react-router-dom";
+import { Route,} from "react-router-dom";
 import './App.css';
-import React, { useEffect} from 'react';
-
+import React, { useContext, useEffect } from 'react';
+import context from './component/Context';
 
 import Head from './component/Head';
 import Foot from './component/Foot';
 
 import Home from './page/Home';
+import Main from './page/Main';
+import Form from './page/Form';
 import Result from './page/Result';
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection} from 'firebase/firestore';
+import { getFirestore, collection } from 'firebase/firestore';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -35,15 +37,20 @@ const db = getFirestore(app);
 const usersRef = collection(db, "users");
 
 const App = (props) => {
+  const state = useContext(context);
+  const { user } = state;
+
   useEffect(() => {
     //console.log(props.location.pathname)
   }, [])
   return (
-    <div className={isMobile ? "App mobile" : "App"} style={{height: props.location.pathname === '/' && '100%'}}>
-      {props.location.pathname === '/' ?  <div className='headM'><img src='./mnd_logo_signature.png' alt='국방부'/></div> : props.location.pathname === '/result' &&  <Head />}
-      <main className='main' style={{flex: props.location.pathname === '/result' && 1}}>
-        <Route exact path="/" render={() => <Home user={usersRef} mobile={isMobile}/>} />
-        <Route path="/result" render={() => <Result user={usersRef} />} />
+    <div className={isMobile ? "App mobile" : "App"} style={{ height: props.location.pathname === '/' && '100%', backgroundColor:  props.location.pathname === '/main' && '#0078D7'}}>
+      {user && <Head path={props.location.pathname}/>}
+      <main className='main'>
+        <Route exact path="/" render={() => <Home users={usersRef} />} />
+        <Route path="/main" render={() => <Main users={usersRef} />} />
+        <Route path="/form" render={() => <Form users={usersRef} />} />
+        <Route path="/result" render={() => <Result users={usersRef} />} />
       </main>
       <Foot />
     </div>
