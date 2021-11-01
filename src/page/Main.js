@@ -21,7 +21,7 @@ const App = (props) => {
                 <i className="ri-information-fill"></i>
                 <div className='noticeText'>
                     <span>화생방 물자 신청 기간입니다</span>
-                    <span className='noticeTextSub'>(21. 11. 01 ~ 11. 12 / 2주간)</span>
+                    <span className='noticeTextSub'>(2021. 11. 01 ~ 03일 부터)</span>
                 </div>
             </div>
             <div className={'buttonWrap'}>

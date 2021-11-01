@@ -33,10 +33,15 @@
   color: #fff;
   font-size: 18px;
   font-weight: 900;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .headTitle img {
-  height: 42px;
+  height: 32px;
+  padding-right: 8px;
 }
 
 .main {
@@ -160,7 +165,7 @@
 }
 
 .login, .order, .user {
-  width: 328px;
+  width: 375px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -213,7 +218,7 @@
   border-radius: 8px;
   background-image: url("./assets/ptn.png");
   background-position: center;
-  opacity: 0.38;
+  opacity: 0.16;
 }
 
 .login .visual .visualText {
@@ -338,7 +343,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 328px;
+  width: 375px;
   height: 100%;
 }
 
@@ -683,7 +688,7 @@ tbody tr:hover {
 }
 
 .mainContainer {
-  width: 328px;
+  width: 375px;
 }
 
 .notice {
