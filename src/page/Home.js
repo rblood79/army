@@ -2,7 +2,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import context from '../component/Context';
-import mnd from '../assets/mnd.png';
+import mnd from '../assets/logo.svg';
 
 const App = (props) => {
   const [number, setNumber] = useState(null);
