@@ -34,7 +34,7 @@
   font-size: 18px;
   font-weight: 900;
 
-  width: 230px;
+  flex:1;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -43,6 +43,11 @@
 .headTitle img {
   height: 32px;
   padding-right: 8px;
+}
+
+.spaceButton {
+  flex: 1;
+  width: 48px;
 }
 
 .main {
@@ -656,6 +661,14 @@
   color: #343434;
 }
 
+.nav .navButton.back {
+  background-color: transparent;
+}
+
+.nav .navButton.back i{
+  color: #fff;
+}
+
 tbody tr:hover {
   transition: all 0.3s ease-in-out;
   background-color: #ccc !important;
@@ -768,7 +781,6 @@ tbody tr:hover {
 
 .nav .navButton.menu {
   visibility: hidden;
-  width: 160px;
 }
 
 @media (max-width: 424.9px) {
