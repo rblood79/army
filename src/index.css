@@ -46,7 +46,9 @@ button {
   font-family: 'Noto Sans KR', sans-serif;
   cursor: pointer;
 }
-
+input {
+  font-size: 16px;
+}
 label {
   cursor: pointer;
 }

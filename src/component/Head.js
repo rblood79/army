@@ -16,7 +16,7 @@ const App = (props) => {
   }
   return (
     <header className="head">
-      <nav className='nav sub'>
+      <nav className='nav sub' style={{maxWidth:user !== 'admin' && '375px'}}>
         {props.path === '/main' ? <div className='headTitle'><img src={logo} alt='MND'/>군 소요물자 신청</div> : user === 'admin' ? <div className='headTitle'><img src={logo} alt='MND'/>군 소요물자 신청관리</div> : <button className='navButton' onClick={back}><i className="ri-arrow-left-s-line"></i></button>}
         {props.path !== '/main' ? user === 'admin' ? 
         <div className='navRes'>
@@ -27,7 +27,7 @@ const App = (props) => {
           <button className='navButton' onClick={test}><i className="ri-database-2-line"></i>DB</button>
         </div>
         : <span>화생방 물자</span> : null}
-        {isMobile ? <button className='navButton menu' onClick={test}><i className="ri-menu-line"></i></button> : <span className={'spaceButton'} style={{width: user === 'admin' ? '206px' : '48px'}}/>}
+        {isMobile ? <button className='navButton menu' onClick={test}><i className="ri-menu-line"></i></button> : <span className={'spaceButton'} style={{width: user === 'admin' ? '230px' : '48px'}}/>}
       </nav>
     </header>
   );
