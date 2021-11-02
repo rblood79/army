@@ -128,30 +128,76 @@ const App = (props) => {
     memberSnapshot.forEach((doc) => {
       memberDoc.push({ id: doc.id, ...doc.data() })
     });
-    console.log('memberDoc//', memberDoc);
 
     const tempDoc = [];
     const q = query(props.users, where("type", "!=", ""));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-      //console.log( _.find(memberDoc, ['id', doc.id]) )
       tempDoc.push({ id: doc.id, ...doc.data(), ..._.find(memberDoc, ['id', doc.id]) })
     });
-    console.log('tempDoc//', tempDoc);
+    //console.log('tempDoc//', tempDoc);
 
     const _type = groupBy(tempDoc, 'type');
     const tempObj = {}
     _.map(_type, (item, key) => {
-      const _item = tempObj[key] = {}
+      const _itemE = tempObj[key] = {}
+
+      const _unit = groupBy(item, 'unit');
+      _.map(_unit, (item, key) => {
+        const _itemU = _itemE[key] = {}
+
+        const _corps = groupBy(item, 'corps');
+        _.map(_corps, (item, key) => {
+          const _itemC = _itemU[key] = {}
+
+          const _company = groupBy(item, 'company');
+          _.map(_company, (item, key) => {
+            const _itemY = _itemC[key] = {}
+
+            const _group = groupBy(item, 'group');
+            _.map(_group, (item, key) => {
+              const _item = _itemY[key] = item
+
+
+            });
+          });
+
+        });
+      });
+
+      /*
+      
+
+      const _unit = groupBy(item, 'unit');
+      const unitObj = {}
+      _.map(_unit, (item, key) => {
+        const _item = unitObj[key] = {}
+        console.log('//', item, key)
+      });*/
+
+      /*const _item = tempObj[key] = {}
+      
       _item.armor = groupBy(item, 'armor', true)
       _item.shoes = groupBy(item, 'shoes', true)
       _item.gloves = groupBy(item, 'gloves', true)
-      _item.mask = groupBy(item, 'mask', true)
+      _item.mask = groupBy(item, 'mask', true)*/
+
+      /*_item.unit = groupBy(item, 'unit');
+      
+      _.map(_item.unit, (item, key) => {
+        item.corps = groupBy(item, 'corps');
+        _.map(item.corps, (item, key) => {
+          item.company = groupBy(item, 'company');
+          _.map(item.company, (item, key) => {
+            item.group = groupBy(item, 'group');
+          });
+        });
+      });*/
     });
     console.log(tempObj)
-    const mergeObj = _.merge({}, result, tempObj);
+    /*const mergeObj = _.merge({}, result, tempObj);
     setResult(mergeObj);
-    setData(tempDoc);
+    setData(tempDoc);*/
   }
 
   useEffect(() => {
