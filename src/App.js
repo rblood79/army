@@ -34,6 +34,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const memberRef = collection(db, "member");
 const usersRef = collection(db, "users");
 
 const App = (props) => {
@@ -50,7 +51,7 @@ const App = (props) => {
         <Route exact path="/" render={() => <Home users={usersRef} />} />
         <Route path="/main" render={() => <Main users={usersRef} />} />
         <Route path="/form" render={() => <Form users={usersRef} />} />
-        <Route path="/result" render={() => <Result users={usersRef} />} />
+        <Route path="/result" render={() => <Result users={usersRef} member={memberRef}/>} />
       </main>
       <Foot />
     </div>

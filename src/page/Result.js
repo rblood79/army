@@ -122,12 +122,23 @@ const App = (props) => {
     }, {})
   }
   const onLoad = async () => {
+    const memberDoc = [];
+    const m = query(props.member, where("type", "!=", ""));
+    const memberSnapshot = await getDocs(m);
+    memberSnapshot.forEach((doc) => {
+      memberDoc.push({ id: doc.id, ...doc.data() })
+    });
+    console.log('memberDoc//', memberDoc);
+
     const tempDoc = [];
     const q = query(props.users, where("type", "!=", ""));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-      tempDoc.push({ id: doc.id, ...doc.data() })
+      //console.log( _.find(memberDoc, ['id', doc.id]) )
+      tempDoc.push({ id: doc.id, ...doc.data(), ..._.find(memberDoc, ['id', doc.id]) })
     });
+    console.log('tempDoc//', tempDoc);
+
     const _type = groupBy(tempDoc, 'type');
     const tempObj = {}
     _.map(_type, (item, key) => {
@@ -137,7 +148,7 @@ const App = (props) => {
       _item.gloves = groupBy(item, 'gloves', true)
       _item.mask = groupBy(item, 'mask', true)
     });
-    //console.log(tempObj)
+    console.log(tempObj)
     const mergeObj = _.merge({}, result, tempObj);
     setResult(mergeObj);
     setData(tempDoc);
@@ -480,8 +491,11 @@ const App = (props) => {
             <table className='table'>
               <thead>
                 <tr>
-                  <th className='hide'>순번</th>
-                  <th>소속</th>
+                  <th>군</th>
+                  <th>부대</th>
+                  <th>대대</th>
+                  <th>중대</th>
+                  <th>반</th>
                   <th>군번</th>
                   <th>보호의</th>
                   <th>덧신</th>
@@ -495,8 +509,11 @@ const App = (props) => {
                   data &&
                   Object.entries(data).map((item, index) =>
                     <tr key={item[0] + item[1]}>
-                      <td className='hide'>{item[0]}</td>
                       <td>{item[1].type}</td>
+                      <td>{item[1].unit}</td>
+                      <td>{item[1].corps}</td>
+                      <td>{item[1].company}</td>
+                      <td>{item[1].group}</td>
                       <td>{item[1].id}</td>
                       <td>{item[1].armor}</td>
                       <td>{item[1].shoes}</td>
