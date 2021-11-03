@@ -13,7 +13,7 @@ const App = (props) => {
   const [data, setData] = useState(null);
   const [result, setResult] = useState(
     {
-      육군: {
+      /*육군: {
         armor: {
           '특1호': [],
           '1호': [],
@@ -102,7 +102,7 @@ const App = (props) => {
           '소': [],
           '소계': [''],
         }
-      }
+      }*/
     }
   );
   const test = () => {
@@ -115,9 +115,9 @@ const App = (props) => {
         carry[group] = []
       }
       carry[group].push(el)
-      if (sum) {
+      /*if (sum) {
         carry['소계'] = [data.length];
-      }
+      }*/
       return carry
     }, {})
   }
@@ -136,8 +136,43 @@ const App = (props) => {
       tempDoc.push({ id: doc.id, ...doc.data(), ..._.find(memberDoc, ['id', doc.id]) })
     });
     //console.log('tempDoc//', tempDoc);
+    const _group = groupBy(tempDoc, 'group');
+    const tempObj = {}
+    _.map(_group, (item, key) => {
+      const _itemP = tempObj[key] = {}
 
-    const _type = groupBy(tempDoc, 'type');
+      const _company = groupBy(item, 'company');
+      _.map(_company, (item, key) => {
+        const _itemY = _itemP[key] = {}
+
+        const _corps = groupBy(item, 'corps');
+        _.map(_corps, (item, key) => {
+          const _itemS = _itemY[key] = {}
+
+          const _unit = groupBy(item, 'unit');
+          _.map(_unit, (item, key) => {
+            const _itemT = _itemS[key] = {}
+
+            const _type = groupBy(item, 'type');
+            _.map(_type, (item, key) => {
+              const _item = _itemT[key] = {}
+
+              _item.armor = groupBy(item, 'armor', true)
+              _item.shoes = groupBy(item, 'shoes', true)
+              _item.gloves = groupBy(item, 'gloves', true)
+              _item.mask = groupBy(item, 'mask', true)
+
+            });
+
+          });
+        });
+      });
+
+    });
+
+    //console.log(tempObj)
+
+    /*const _type = groupBy(tempDoc, 'type');
     const tempObj = {}
     _.map(_type, (item, key) => {
       const _itemE = tempObj[key] = {}
@@ -156,48 +191,25 @@ const App = (props) => {
 
             const _group = groupBy(item, 'group');
             _.map(_group, (item, key) => {
-              const _item = _itemY[key] = item
-
+              //const _item = _itemY[key] = item
+              const _item = _itemY[key] = {}
+              _item.armor = groupBy(item, 'armor', true)
+              _item.shoes = groupBy(item, 'shoes', true)
+              _item.gloves = groupBy(item, 'gloves', true)
+              _item.mask = groupBy(item, 'mask', true)
 
             });
           });
 
         });
       });
-
-      /*
-      
-
-      const _unit = groupBy(item, 'unit');
-      const unitObj = {}
-      _.map(_unit, (item, key) => {
-        const _item = unitObj[key] = {}
-        console.log('//', item, key)
-      });*/
-
-      /*const _item = tempObj[key] = {}
-      
-      _item.armor = groupBy(item, 'armor', true)
-      _item.shoes = groupBy(item, 'shoes', true)
-      _item.gloves = groupBy(item, 'gloves', true)
-      _item.mask = groupBy(item, 'mask', true)*/
-
-      /*_item.unit = groupBy(item, 'unit');
-      
-      _.map(_item.unit, (item, key) => {
-        item.corps = groupBy(item, 'corps');
-        _.map(item.corps, (item, key) => {
-          item.company = groupBy(item, 'company');
-          _.map(item.company, (item, key) => {
-            item.group = groupBy(item, 'group');
-          });
-        });
-      });*/
-    });
-    console.log(tempObj)
+    });*/
+    //console.log(tempObj)
     /*const mergeObj = _.merge({}, result, tempObj);
     setResult(mergeObj);
     setData(tempDoc);*/
+    setResult(tempObj);
+    setData(tempDoc);
   }
 
   useEffect(() => {
@@ -224,13 +236,17 @@ const App = (props) => {
                 <thead>
                   <tr>
                     <th rowSpan='2'>군</th>
-                    <th rowSpan='2'>소속</th>
+                    <th colSpan='4'>소속</th>
                     <th colSpan='8'>보호의</th>
                     <th colSpan='3'>덧신</th>
                     <th colSpan='4'>장갑</th>
                     <th colSpan='5'>방독면</th>
                   </tr>
                   <tr>
+                    <th>부대</th>
+                    <th>대대</th>
+                    <th>중대</th>
+                    <th>반</th>
                     <th>특1호</th>
                     <th>1호</th>
                     <th>2호</th>
@@ -255,21 +271,72 @@ const App = (props) => {
                 </thead>
                 <tbody>
                   {
-                    Object.entries(result).map((item) =>
-                      <tr key={item[0] + item[1]}>
-                        <td>{item[0]}</td>
-                        <td>-</td>
-                        {
-                          Object.entries(item[1]).map((item) =>
-                            item[0] !== '' && Object.entries(item[1]).map((item, i) =>
-                              <td key={item[0] + item[1]} className={item[0] === '소계' ? 'sum' : null}>
-                                {item[0] === '소계' ? item[1] : item[1].length > 0 ? item[1].length : null}
-                              </td>
+                    Object.entries(result).map((item) => {
+                      const test = [item[0]];
+                      Object.entries(item[1]).map((item) => {
+                        test.splice(0, 0, item[0])
+                        return (
+                          <>
+                            {
+                              Object.entries(item[1]).map((item) => {
+                                test.splice(0, 0, item[0])
+                                return (
+                                  <>
+                                    {
+                                      Object.entries(item[1]).map((item) => {
+                                        test.splice(0, 0, item[0])
+                                        return (
+                                          <>
+                                            {
+                                              Object.entries(item[1]).map((item) => {
+                                                test.splice(0, 0, item[0])
+                                                return (
+                                                  <>
+                                                    {
+                                                      Object.entries(item[1]).map((item) => {
+                                                        //console.log(item.length)
+                                                        //test.push(item.length)
+                                                        const title = item[0]
+                                                        Object.entries(item[1]).map((item, i) => {
+                                                          console.log(item[1])
+                                                          test.push(title+item[0]+item[1].length)
+                                                        })
+                                                      })
+                                                    }
+                                                  </>
+                                                )
+                                              })
+                                            }
+                                          </>
+                                        )
+                                      })
+                                    }
+                                  </>
+                                )
+                              })
+                            }
+                          </>
+                        )
+                      })
+                      /*Object.entries(item[1]).map((item) =>
+                        item[0] !== '' && Object.entries(item[1]).map((item, i) =>
+                          <td key={item[0] + item[1]} className={item[0] === '소계' ? 'sum' : null}>
+                            {item[0] === '소계' ? item[1] : item[1].length > 0 ? item[1].length : null}
+                          </td>
+                        )
+                      )*/
+
+
+                      return (
+                        <tr key={item[0] + item[1]}>
+                          {
+                            Object.entries(test).map((item) =>
+                              <td>{item[1]}</td>
                             )
-                          )
-                        }
-                      </tr>
-                    )
+                          }
+                        </tr>
+                      )
+                    })
                   }
                 </tbody>
                 <tfoot>

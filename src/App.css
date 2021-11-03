@@ -78,6 +78,7 @@
   table-layout: fixed;
   border: 2px solid #000;
   background-color: #fff;
+  font-size: 12px;
 }
 
 .table thead {
