@@ -121,6 +121,50 @@ const App = (props) => {
       return carry
     }, {})
   }
+  const groupBy2 = (data, key, sum) => {
+    const armorDef = {
+      '특1호': [],
+      '1호': [],
+      '2호': [],
+      '3호': [],
+      '4호': [],
+      '5호': [],
+      '6호': [],
+      '소계': [''],
+    }
+    const shoesDef = {
+      '대': [],
+      '소': [],
+      '소계': [''],
+    }
+    const glovesDef = {
+      '대': [],
+      '중': [],
+      '소': [],
+      '소계': [''],
+    }
+    const maskDef = {
+      '특대': [],
+      '대': [],
+      '중': [],
+      '소': [],
+      '소계': [''],
+    }
+    return data.reduce(function (carry, el) {
+      var group = el[key];
+      if (carry[group] === undefined) {
+        carry[group] = []
+      }
+      carry[group].push(el)
+      console.log('//', data)
+      if (sum) {
+        carry['소계'] = [data.length];
+      }
+      const mergeCarry = _.merge({}, key === 'armor' ? armorDef : key === 'shoes' ? shoesDef : key === 'gloves' ? glovesDef : key === 'mask' ? maskDef : null, carry);
+      //console.log('carry', key, mergeCarry)
+      return mergeCarry
+    }, {})
+  }
   const onLoad = async () => {
     const memberDoc = [];
     const m = query(props.member, where("type", "!=", ""));
@@ -157,53 +201,17 @@ const App = (props) => {
             _.map(_type, (item, key) => {
               const _item = _itemT[key] = {}
 
-              _item.armor = groupBy(item, 'armor', true)
-              _item.shoes = groupBy(item, 'shoes', true)
-              _item.gloves = groupBy(item, 'gloves', true)
-              _item.mask = groupBy(item, 'mask', true)
+              _item.armor = groupBy2(item, 'armor', true)
+              _item.shoes = groupBy2(item, 'shoes', true)
+              _item.gloves = groupBy2(item, 'gloves', true)
+              _item.mask = groupBy2(item, 'mask', true)
 
             });
-
           });
         });
       });
-
     });
 
-    //console.log(tempObj)
-
-    /*const _type = groupBy(tempDoc, 'type');
-    const tempObj = {}
-    _.map(_type, (item, key) => {
-      const _itemE = tempObj[key] = {}
-
-      const _unit = groupBy(item, 'unit');
-      _.map(_unit, (item, key) => {
-        const _itemU = _itemE[key] = {}
-
-        const _corps = groupBy(item, 'corps');
-        _.map(_corps, (item, key) => {
-          const _itemC = _itemU[key] = {}
-
-          const _company = groupBy(item, 'company');
-          _.map(_company, (item, key) => {
-            const _itemY = _itemC[key] = {}
-
-            const _group = groupBy(item, 'group');
-            _.map(_group, (item, key) => {
-              //const _item = _itemY[key] = item
-              const _item = _itemY[key] = {}
-              _item.armor = groupBy(item, 'armor', true)
-              _item.shoes = groupBy(item, 'shoes', true)
-              _item.gloves = groupBy(item, 'gloves', true)
-              _item.mask = groupBy(item, 'mask', true)
-
-            });
-          });
-
-        });
-      });
-    });*/
     //console.log(tempObj)
     /*const mergeObj = _.merge({}, result, tempObj);
     setResult(mergeObj);
@@ -298,8 +306,8 @@ const App = (props) => {
                                                         //test.push(item.length)
                                                         const title = item[0]
                                                         Object.entries(item[1]).map((item, i) => {
-                                                          console.log(item[1])
-                                                          test.push(title+item[0]+item[1].length)
+                                                          //console.log(item[1])
+                                                          test.push(item[1].length > 0 ? item[1].length : null)
                                                         })
                                                       })
                                                     }
@@ -325,8 +333,6 @@ const App = (props) => {
                           </td>
                         )
                       )*/
-
-
                       return (
                         <tr key={item[0] + item[1]}>
                           {
@@ -341,7 +347,7 @@ const App = (props) => {
                 </tbody>
                 <tfoot>
                   <tr>
-                    <th colSpan='2'>계</th>
+                    <th colSpan='5'>계</th>
                     <th>{data && _.filter(data, { 'armor': '특1호' }).length}</th>
                     <th>{data && _.filter(data, { 'armor': '1호' }).length}</th>
                     <th>{data && _.filter(data, { 'armor': '2호' }).length}</th>
