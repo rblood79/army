@@ -5,13 +5,32 @@ import context from '../component/Context';
 import { useHistory } from "react-router-dom";
 //import { isMobile } from 'react-device-detect';
 
-import { query, where, getDocs } from 'firebase/firestore';
+import { doc, setDoc, query, where, getDocs } from 'firebase/firestore';
 const App = (props) => {
   const history = useHistory();
   const state = useContext(context);
   const { user } = state;
+  const [total, setTotal] = useState(null);
   const [data, setData] = useState(null);
   const [result, setResult] = useState({});
+  //
+  const [type, setType] = useState(null);
+  const [unit, setUnit] = useState(null);
+  const [corps, setCorps] = useState(null);
+  const [company, setCompany] = useState(null);
+  const [group, setGroup] = useState(null);
+  const [number, setNumber] = useState(null);
+
+  const save = async () => {
+    await setDoc(doc(props.member, number), {
+      type: type,
+      unit: unit,
+      corps: corps,
+      company: company,
+      group: group,
+    }, onLoad());
+  }
+
   const test = () => {
     alert('시험버전에선 제공되지 않습니다')
   }
@@ -69,6 +88,7 @@ const App = (props) => {
     querySnapshot.forEach((doc) => {
       tempDoc.push({ id: doc.id, ...doc.data(), ..._.find(memberDoc, ['id', doc.id]) })
     });
+    setTotal(tempDoc);
 
     const testDoc = [];
     memberSnapshot.forEach((doc) => {
@@ -109,12 +129,8 @@ const App = (props) => {
       });
     });
 
-    //console.log(tempObj)
-    /*const mergeObj = _.merge({}, result, tempObj);
-    setResult(mergeObj);
-    setData(tempDoc);*/
+    console.log(_.filter(total, { 'armor': '특1호' }))
     setResult(tempObj);
-
   }
 
   useEffect(() => {
@@ -122,6 +138,19 @@ const App = (props) => {
   }, [])
   return (
     <div className='resultContainer'>
+      <div className='addUser'>
+        <div className='select'>
+          <input type='radio' name='type' id='type0' value='육군' onChange={({ target: { value } }) => setType(value)} /><label htmlFor='type0' >육군</label>
+          <input type='radio' name='type' id='type1' value='공군' onChange={({ target: { value } }) => setType(value)} /><label htmlFor='type1' >공군</label>
+          <input type='radio' name='type' id='type2' value='해군' onChange={({ target: { value } }) => setType(value)} /><label htmlFor='type2' >해군</label>
+        </div>
+        <input type='text' onChange={({ target: { value } }) => { setUnit(value) }} placeholder='부대'/>
+        <input type='text' onChange={({ target: { value } }) => { setCorps(value) }} placeholder='대대'/>
+        <input type='text' onChange={({ target: { value } }) => { setCompany(value) }} placeholder='중대'/>
+        <input type='text' onChange={({ target: { value } }) => { setGroup(value) }} placeholder='소대'/>
+        <input type='text' minLength={6} maxLength={12} onChange={({ target: { value } }) => { setNumber(value) }} placeholder='군번'/>
+        <button onClick={save}>등록</button>
+      </div>
       {
         result &&
         <div className='total'>
@@ -140,18 +169,18 @@ const App = (props) => {
             <table className='table'>
               <thead>
                 <tr>
-                  <th rowSpan='2'>군</th>
-                  <th colSpan='4'>소속</th>
+                  <th colSpan='5'>소속</th>
                   <th colSpan='8'>보호의</th>
                   <th colSpan='3'>덧신</th>
                   <th colSpan='4'>장갑</th>
                   <th colSpan='5'>방독면</th>
                 </tr>
-                <tr>
+                <tr className='subHead'>
+                  <th>군</th>
                   <th>부대</th>
                   <th>대대</th>
                   <th>중대</th>
-                  <th>반</th>
+                  <th>소대(반)</th>
                   <th>특1호</th>
                   <th>1호</th>
                   <th>2호</th>
@@ -178,47 +207,22 @@ const App = (props) => {
                 {
                   Object.entries(result).map((item) => {
                     const test = [item[0] !== 'undefined' ? item[0] : <i className="ri-close-line" />];
-
                     Object.entries(item[1]).map((item) => {
                       test.splice(0, 0, item[0] !== 'undefined' ? item[0] : <i className="ri-close-line" />)
-                      return (
-                        <>
-                          {
-                            Object.entries(item[1]).map((item) => {
-                              test.splice(0, 0, item[0] !== 'undefined' ? item[0] : <i className="ri-close-line" />)
-                              return (
-                                <>
-                                  {
-                                    Object.entries(item[1]).map((item) => {
-                                      test.splice(0, 0, item[0] !== 'undefined' ? item[0] : <i className="ri-close-line" />)
-                                      return (
-                                        <>
-                                          {
-                                            Object.entries(item[1]).map((item) => {
-                                              test.splice(0, 0, item[0] !== 'undefined' ? item[0] : <i className="ri-close-line" />)
-                                              return (
-                                                <>
-                                                  {
-                                                    Object.entries(item[1]).map((item) => {
-                                                      Object.entries(item[1]).map((item, i) => {
-                                                        test.push(item[0] === '소계' ? item[1] : item[1].length > 0 ? item[1].length : null)
-                                                      })
-                                                    })
-                                                  }
-                                                </>
-                                              )
-                                            })
-                                          }
-                                        </>
-                                      )
-                                    })
-                                  }
-                                </>
+                      Object.entries(item[1]).map((item) => {
+                        test.splice(0, 0, item[0] !== 'undefined' ? item[0] : <i className="ri-close-line" />)
+                        Object.entries(item[1]).map((item) => {
+                          test.splice(0, 0, item[0] !== 'undefined' ? item[0] : <i className="ri-close-line" />)
+                          Object.entries(item[1]).map((item) => {
+                            test.splice(0, 0, item[0] !== 'undefined' ? item[0] : <i className="ri-close-line" />)
+                            Object.entries(item[1]).map((item) =>
+                              Object.entries(item[1]).map((item, i) =>
+                                test.push(item[0] === '소계' ? item[1] : item[1].length > 0 ? item[1].length : null)
                               )
-                            })
-                          }
-                        </>
-                      )
+                            )
+                          })
+                        })
+                      })
                     })
                     return (
                       <tr key={item[0] + item[1]}>
@@ -237,26 +241,26 @@ const App = (props) => {
               <tfoot>
                 <tr>
                   <th colSpan='5'>계</th>
-                  <th>{data && _.filter(data, { 'armor': '특1호' }).length}</th>
-                  <th>{data && _.filter(data, { 'armor': '1호' }).length}</th>
-                  <th>{data && _.filter(data, { 'armor': '2호' }).length}</th>
-                  <th>{data && _.filter(data, { 'armor': '3호' }).length}</th>
-                  <th>{data && _.filter(data, { 'armor': '4호' }).length}</th>
-                  <th>{data && _.filter(data, { 'armor': '5호' }).length}</th>
-                  <th>{data && _.filter(data, { 'armor': '6호' }).length}</th>
-                  <th>{data && data.length}</th>
-                  <th>{data && _.filter(data, { 'shoes': '대' }).length}</th>
-                  <th>{data && _.filter(data, { 'shoes': '소' }).length}</th>
-                  <th>{data && data.length}</th>
-                  <th>{data && _.filter(data, { 'gloves': '대' }).length}</th>
-                  <th>{data && _.filter(data, { 'gloves': '중' }).length}</th>
-                  <th>{data && _.filter(data, { 'gloves': '소' }).length}</th>
-                  <th>{data && data.length}</th>
-                  <th>{data && _.filter(data, { 'mask': '특대' }).length}</th>
-                  <th>{data && _.filter(data, { 'mask': '대' }).length}</th>
-                  <th>{data && _.filter(data, { 'mask': '중' }).length}</th>
-                  <th>{data && _.filter(data, { 'mask': '소' }).length}</th>
-                  <th>{data && data.length}</th>
+                  <th>{total && _.filter(total, { 'armor': '특1호' }).length}</th>
+                  <th>{total && _.filter(total, { 'armor': '1호' }).length}</th>
+                  <th>{total && _.filter(total, { 'armor': '2호' }).length}</th>
+                  <th>{total && _.filter(total, { 'armor': '3호' }).length}</th>
+                  <th>{total && _.filter(total, { 'armor': '4호' }).length}</th>
+                  <th>{total && _.filter(total, { 'armor': '5호' }).length}</th>
+                  <th>{total && _.filter(total, { 'armor': '6호' }).length}</th>
+                  <th className='sum'>{total && total.length}</th>
+                  <th>{total && _.filter(total, { 'shoes': '대' }).length}</th>
+                  <th>{total && _.filter(total, { 'shoes': '소' }).length}</th>
+                  <th className='sum'>{total && total.length}</th>
+                  <th>{total && _.filter(total, { 'gloves': '대' }).length}</th>
+                  <th>{total && _.filter(total, { 'gloves': '중' }).length}</th>
+                  <th>{total && _.filter(total, { 'gloves': '소' }).length}</th>
+                  <th className='sum'>{total && total.length}</th>
+                  <th>{total && _.filter(total, { 'mask': '특대' }).length}</th>
+                  <th>{total && _.filter(total, { 'mask': '대' }).length}</th>
+                  <th>{total && _.filter(total, { 'mask': '중' }).length}</th>
+                  <th>{total && _.filter(total, { 'mask': '소' }).length}</th>
+                  <th className='sum'>{total && total.length}</th>
                 </tr>
               </tfoot>
             </table>
@@ -267,7 +271,7 @@ const App = (props) => {
 
       <div className='users'>
         <div className='resultHead'>
-          <h2 className='title'>신청자 현황</h2>
+          <h2 className='title'>신청자 현황 - <span>{data.length}</span></h2>
           <div className='buttonGroup' style={{ display: 'none' }}>
             <div className='wrap'>
               <button disabled onClick={test}><i className="ri-user-voice-line"></i>미신청자 자동안내</button>
@@ -287,7 +291,7 @@ const App = (props) => {
                   <th>부대</th>
                   <th>대대</th>
                   <th>중대</th>
-                  <th>반</th>
+                  <th>소대(반)</th>
                   <th>군번</th>
                   <th>보호의</th>
                   <th>덧신</th>
@@ -299,7 +303,7 @@ const App = (props) => {
               <tbody>
                 {
                   data &&
-                  Object.entries(data).map((item, index) =>
+                  Object.entries(data).map((item) =>
                     <tr key={item[0] + item[1]}>
                       <td>{item[1].type}</td>
                       <td>{item[1].unit}</td>
@@ -311,7 +315,7 @@ const App = (props) => {
                       <td>{item[1].shoes}</td>
                       <td>{item[1].gloves}</td>
                       <td>{item[1].mask}</td>
-                      <td>{item[1].armor ? <i className="ri-checkbox-circle-line" /> : <i className="ri-checkbox-blank-circle-line" ></i>}</td>
+                      <td>{item[1].armor ? <i className="ri-checkbox-circle-line" /> : <i className="ri-close-line" ></i>}</td>
                     </tr>
                   )
                 }
