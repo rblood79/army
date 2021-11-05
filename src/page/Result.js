@@ -86,18 +86,19 @@ const App = (props) => {
     const q = query(props.users, where("type", "!=", ""));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-      tempDoc.push({ id: doc.id, ...doc.data(), ..._.find(memberDoc, ['id', doc.id]) })
+      const aa = _.find(memberDoc, ['id', doc.id])
+      const xx = aa ? aa.type + aa.unit + aa.corps + aa.company + ',' + aa.group : doc.data().type + '-';
+      tempDoc.push({ id: doc.id, ...doc.data(), ..._.find(memberDoc, ['id', doc.id]), test: xx })
     });
     setTotal(tempDoc);
 
     const testDoc = [];
     memberSnapshot.forEach((doc) => {
-      //console.log(_.find(tempDoc, ['id', doc.id]))
       testDoc.push({ id: doc.id, ...doc.data(), ..._.find(tempDoc, ['id', doc.id]) })
     });
     setData(testDoc);
 
-    const _group = groupBy(tempDoc, 'group');
+    const _group = groupBy(tempDoc, 'test');
     const tempObj = {}
     _.map(_group, (item, key) => {
       const _itemP = tempObj[key] = {}
@@ -129,7 +130,9 @@ const App = (props) => {
       });
     });
 
-    console.log(_.filter(total, { 'armor': '특1호' }))
+    /*const sortable = Object.entries(tempObj)
+      .sort(([, a], [, b]) => a - b)
+      .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});*/
     setResult(tempObj);
   }
 
@@ -144,18 +147,18 @@ const App = (props) => {
           <input type='radio' name='type' id='type1' value='공군' onChange={({ target: { value } }) => setType(value)} /><label htmlFor='type1' >공군</label>
           <input type='radio' name='type' id='type2' value='해군' onChange={({ target: { value } }) => setType(value)} /><label htmlFor='type2' >해군</label>
         </div>
-        <input type='text' onChange={({ target: { value } }) => { setUnit(value) }} placeholder='부대'/>
-        <input type='text' onChange={({ target: { value } }) => { setCorps(value) }} placeholder='대대'/>
-        <input type='text' onChange={({ target: { value } }) => { setCompany(value) }} placeholder='중대'/>
-        <input type='text' onChange={({ target: { value } }) => { setGroup(value) }} placeholder='소대'/>
-        <input type='text' minLength={6} maxLength={12} onChange={({ target: { value } }) => { setNumber(value) }} placeholder='군번'/>
+        <input type='text' value='-' onChange={({ target: { value } }) => { setUnit(value) }} placeholder='부대' />
+        <input type='text' value='-' onChange={({ target: { value } }) => { setCorps(value) }} placeholder='대대' />
+        <input type='text' value='-' onChange={({ target: { value } }) => { setCompany(value) }} placeholder='중대' />
+        <input type='text' value='-' onChange={({ target: { value } }) => { setGroup(value) }} placeholder='소대' />
+        <input type='text' minLength={6} maxLength={12} onChange={({ target: { value } }) => { setNumber(value) }} placeholder='군번' />
         <button onClick={save}>등록</button>
       </div>
       {
         result &&
         <div className='total'>
           <div className='resultHead'>
-            <h2 className='title'>종합소요 현황 - 화생방 물자</h2>
+            <h2 className='title'>종합소요 현황 <span className='titleSub'>- 화생방 물자</span></h2>
             <div className='buttonGroup'>
               <button onClick={onLoad}><i className="ri-refresh-line"></i>재조회</button>
               <div className='wrap'>
@@ -206,15 +209,15 @@ const App = (props) => {
               <tbody>
                 {
                   Object.entries(result).map((item) => {
-                    const test = [item[0] !== 'undefined' ? item[0] : <i className="ri-close-line" />];
+                    const test = [item[0] !== 'undefined' && item[0].split(',')[1]];
                     Object.entries(item[1]).map((item) => {
-                      test.splice(0, 0, item[0] !== 'undefined' ? item[0] : <i className="ri-close-line" />)
+                      test.splice(0, 0, item[0] !== 'undefined' && item[0])
                       Object.entries(item[1]).map((item) => {
-                        test.splice(0, 0, item[0] !== 'undefined' ? item[0] : <i className="ri-close-line" />)
+                        test.splice(0, 0, item[0] !== 'undefined' && item[0])
                         Object.entries(item[1]).map((item) => {
-                          test.splice(0, 0, item[0] !== 'undefined' ? item[0] : <i className="ri-close-line" />)
+                          test.splice(0, 0, item[0] !== 'undefined' && item[0])
                           Object.entries(item[1]).map((item) => {
-                            test.splice(0, 0, item[0] !== 'undefined' ? item[0] : <i className="ri-close-line" />)
+                            test.splice(0, 0, item[0] !== 'undefined' && item[0])
                             Object.entries(item[1]).map((item) =>
                               Object.entries(item[1]).map((item, i) =>
                                 test.push(item[0] === '소계' ? item[1] : item[1].length > 0 ? item[1].length : null)
@@ -265,13 +268,14 @@ const App = (props) => {
               </tfoot>
             </table>
           </div>
+          <span className='tableComment'>등록되지않은 신청자포함</span>
         </div>
 
       }
 
       <div className='users'>
         <div className='resultHead'>
-          <h2 className='title'>신청자 현황 - <span>{data.length}</span></h2>
+          <h2 className='title'>신청자 현황<span className='titleSub'>- 전체 {data && data.length}명 중 {data && _.filter(data, 'armor').length}신청</span></h2>
           <div className='buttonGroup' style={{ display: 'none' }}>
             <div className='wrap'>
               <button disabled onClick={test}><i className="ri-user-voice-line"></i>미신청자 자동안내</button>

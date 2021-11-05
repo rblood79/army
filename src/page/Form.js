@@ -29,6 +29,10 @@ const App = (props) => {
   const onSave = async () => {
     await setDoc(doc(props.users, user), {
       type: army,
+      unit: '-',
+      corps: '-',
+      company: '-',
+      group: '-',
       armor: armor,
       gloves: gloves,
       shoes: shoes,
