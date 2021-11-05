@@ -103,8 +103,17 @@
   font-weight: 400;
 }
 
-.table .sum {
+.table .sum
+{
   background-color: rgba(248, 191, 0, 0.24) !important;
+}
+
+.total .table td:nth-child(13),
+.total .table td:nth-child(16),
+.total .table td:nth-child(20),
+.total .table td:nth-child(25)
+{
+  background-color: #fffcf0;
 }
 
 .table i {
@@ -700,7 +709,7 @@
 
 tbody tr:hover td {
   transition: all 0.3s ease-in-out;
-  background-color: #424242;
+  background-color: #424242 !important;
   color: #fff;
   font-weight: 900;
 }
