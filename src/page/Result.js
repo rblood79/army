@@ -88,7 +88,7 @@ const App = (props) => {
     querySnapshot.forEach((doc) => {
       const aa = _.find(memberDoc, ['id', doc.id])
       const xx = aa ? aa.type + aa.unit + aa.corps + aa.company + ',' + aa.group : doc.data().type + '-';
-      tempDoc.push({ id: doc.id, ...doc.data(), ..._.find(memberDoc, ['id', doc.id]), test: xx })
+      tempDoc.push({ id: doc.id, ...doc.data(), ...aa, test: xx })
     });
     setTotal(tempDoc);
 
@@ -97,6 +97,8 @@ const App = (props) => {
       testDoc.push({ id: doc.id, ...doc.data(), ..._.find(tempDoc, ['id', doc.id]) })
     });
     setData(testDoc);
+
+    //console.log(_.filter(memberDoc, ['group', 'C-3반']))
 
     const _group = groupBy(tempDoc, 'test');
     const tempObj = {}
@@ -130,9 +132,6 @@ const App = (props) => {
       });
     });
 
-    /*const sortable = Object.entries(tempObj)
-      .sort(([, a], [, b]) => a - b)
-      .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});*/
     setResult(tempObj);
   }
 
@@ -147,10 +146,10 @@ const App = (props) => {
           <input type='radio' name='type' id='type1' value='공군' onChange={({ target: { value } }) => setType(value)} /><label htmlFor='type1' >공군</label>
           <input type='radio' name='type' id='type2' value='해군' onChange={({ target: { value } }) => setType(value)} /><label htmlFor='type2' >해군</label>
         </div>
-        <input type='text' value='-' onChange={({ target: { value } }) => { setUnit(value) }} placeholder='부대' />
-        <input type='text' value='-' onChange={({ target: { value } }) => { setCorps(value) }} placeholder='대대' />
-        <input type='text' value='-' onChange={({ target: { value } }) => { setCompany(value) }} placeholder='중대' />
-        <input type='text' value='-' onChange={({ target: { value } }) => { setGroup(value) }} placeholder='소대' />
+        <input type='text' onChange={({ target: { value } }) => { setUnit(value) }} placeholder='부대' />
+        <input type='text' onChange={({ target: { value } }) => { setCorps(value) }} placeholder='대대' />
+        <input type='text' onChange={({ target: { value } }) => { setCompany(value) }} placeholder='중대' />
+        <input type='text' onChange={({ target: { value } }) => { setGroup(value) }} placeholder='소대' />
         <input type='text' minLength={6} maxLength={12} onChange={({ target: { value } }) => { setNumber(value) }} placeholder='군번' />
         <button onClick={save}>등록</button>
       </div>
@@ -275,7 +274,7 @@ const App = (props) => {
 
       <div className='users'>
         <div className='resultHead'>
-          <h2 className='title'>신청자 현황<span className='titleSub'>- 전체 {data && data.length}명 중 {data && _.filter(data, 'armor').length}신청</span></h2>
+          <h2 className='title'>신청자 현황<span className='titleSub'>- 전체 {data && data.length}명 중 {data && _.filter(data, 'armor').length}명 신청</span></h2>
           <div className='buttonGroup' style={{ display: 'none' }}>
             <div className='wrap'>
               <button disabled onClick={test}><i className="ri-user-voice-line"></i>미신청자 자동안내</button>
