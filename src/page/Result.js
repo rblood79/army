@@ -6,7 +6,7 @@ import context from '../component/Context';
 import { useHistory } from "react-router-dom";
 import { isMobile } from 'react-device-detect';
 
-import { doc, setDoc, query, where, getDocs } from 'firebase/firestore';
+import { doc, setDoc, query, where, getDocs, deleteDoc } from 'firebase/firestore';
 const App = (props) => {
   const history = useHistory();
   const state = useContext(context);
@@ -75,6 +75,25 @@ const App = (props) => {
       }
     }, {})
   }
+  const clear = async () => {
+    const q = query(props.users);
+    const m = query(props.member);
+    const querySnapshot = await getDocs(q);
+    const querySnapshot2 = await getDocs(m);
+    querySnapshot.forEach((doc) => {
+      deleteItem(props.users, doc.id)
+    });
+    querySnapshot2.forEach((doc) => {
+      deleteItem(props.member, doc.id)
+    });
+    onLoad();
+  }
+
+  const deleteItem = async (pp, nameId) => {
+    const docRef = doc(pp, nameId);
+    deleteDoc(docRef)
+  }
+
   const onLoad = async () => {
     const memberDoc = [];
     const m = query(props.member, where("type", "!=", ""));
@@ -141,7 +160,7 @@ const App = (props) => {
   }, [])
   return (
     <div className='resultContainer'>
-      <div className='addUser' style={{display: !isMobile && 'flex'}}>
+      <div className='addUser' style={{ display: !isMobile && 'flex' }}>
         <div className='select'>
           <input type='radio' name='type' id='type0' value='육군' onChange={({ target: { value } }) => setType(value)} /><label htmlFor='type0' >육군</label>
           <input type='radio' name='type' id='type1' value='공군' onChange={({ target: { value } }) => setType(value)} /><label htmlFor='type1' >공군</label>
@@ -161,6 +180,10 @@ const App = (props) => {
             <h2 className='title'>종합소요 현황 <span className='titleSub'>- 화생방 물자</span></h2>
             <div className='buttonGroup'>
               <button onClick={onLoad}><i className="ri-refresh-line"></i>재조회</button>
+              <button onClick={() => {
+                window.confirm('데이터를 삭제 합니다 삭제시 복구 할수 없습니다. 다시 한번 확인하세요.') && clear();
+              }}><i className="ri-delete-bin-2-line"></i>초기화</button>
+
               <div className='wrap'>
                 <button disabled onClick={test}><i className="ri-folder-upload-line"></i>소요현황 업로드</button>
                 <button disabled onClick={test}><i className="ri-folder-download-line"></i>부대별 현황 다운로드</button>
