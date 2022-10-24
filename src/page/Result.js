@@ -4,7 +4,7 @@ import 'remixicon/fonts/remixicon.css'
 import React, { useState, useEffect, useContext } from 'react';
 import context from '../component/Context';
 import { useHistory } from "react-router-dom";
-//import { isMobile } from 'react-device-detect';
+import { isMobile } from 'react-device-detect';
 
 import { doc, setDoc, query, where, getDocs } from 'firebase/firestore';
 const App = (props) => {
@@ -141,7 +141,7 @@ const App = (props) => {
   }, [])
   return (
     <div className='resultContainer'>
-      <div className='addUser'>
+      <div className='addUser' style={{display: !isMobile && 'flex'}}>
         <div className='select'>
           <input type='radio' name='type' id='type0' value='육군' onChange={({ target: { value } }) => setType(value)} /><label htmlFor='type0' >육군</label>
           <input type='radio' name='type' id='type1' value='공군' onChange={({ target: { value } }) => setType(value)} /><label htmlFor='type1' >공군</label>
