@@ -179,10 +179,10 @@ const App = (props) => {
           <div className='resultHead'>
             <h2 className='title'>종합소요 현황 <span className='titleSub'>- 화생방 물자</span></h2>
             <div className='buttonGroup'>
-              <button onClick={onLoad}><i className="ri-refresh-line"></i>재조회</button>
+              <button onClick={onLoad}><i className="ri-refresh-line"></i>{!isMobile && '재조회'}</button>
               <button onClick={() => {
                 window.confirm('데이터를 삭제 합니다 삭제시 복구 할수 없습니다. 다시 한번 확인하세요.') && clear();
-              }}><i className="ri-delete-bin-2-line"></i>초기화</button>
+              }}><i className="ri-delete-bin-2-line"></i>{!isMobile && '초기화'}</button>
 
               <div className='wrap'>
                 <button disabled onClick={test}><i className="ri-folder-upload-line"></i>소요현황 업로드</button>
