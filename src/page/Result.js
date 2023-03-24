@@ -165,6 +165,7 @@ const App = (props) => {
           <input type='radio' name='type' id='type0' value='육군' onChange={({ target: { value } }) => setType(value)} /><label htmlFor='type0' >육군</label>
           <input type='radio' name='type' id='type1' value='공군' onChange={({ target: { value } }) => setType(value)} /><label htmlFor='type1' >공군</label>
           <input type='radio' name='type' id='type2' value='해군' onChange={({ target: { value } }) => setType(value)} /><label htmlFor='type2' >해군</label>
+          <input type='radio' name='type' id='type3' value='예비군' onChange={({ target: { value } }) => setType(value)} /><label htmlFor='type3' >예비군</label>
         </div>
         <input type='text' onChange={({ target: { value } }) => { setUnit(value) }} placeholder='부대' />
         <input type='text' onChange={({ target: { value } }) => { setCorps(value) }} placeholder='대대' />

@@ -36,7 +36,7 @@ const App = (props) => {
     setPw(null)
     setArmy(null)
     setUser(null)
-  }, [])
+  }, [setArmy, setUser])
 
   return (
     <div className='container'>
@@ -59,7 +59,8 @@ const App = (props) => {
                 <div className='armySelect'>
                   <input type='radio' name='type' id='type0' value='육군' onChange={({ target: { value } }) => setArmy(value)} /><label htmlFor='type0' className='armyLeft'>육군</label>
                   <input type='radio' name='type' id='type1' value='공군' onChange={({ target: { value } }) => setArmy(value)} /><label htmlFor='type1' className='armyCenter'>공군</label>
-                  <input type='radio' name='type' id='type2' value='해군' onChange={({ target: { value } }) => setArmy(value)} /><label htmlFor='type2' className='armyRight'>해군</label>
+                  <input type='radio' name='type' id='type2' value='해군' onChange={({ target: { value } }) => setArmy(value)} /><label htmlFor='type2' className='armyCenter'>해군</label>
+                  <input type='radio' name='type' id='type3' value='예비군' onChange={({ target: { value } }) => setArmy(value)} /><label htmlFor='type3' className='armyRight'>예비군</label>
                 </div>
               </>
             }
